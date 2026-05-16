@@ -4,8 +4,9 @@ public enum DaniTech_EntityAnimState
 {
     None = 0,
     Idle,
-    Walk,
-    Atk
+    Move,
+    Atk,
+    TakeDamage
 }
 
 public class DaniTech_2DAnimatorController : MonoBehaviour
@@ -31,11 +32,14 @@ public class DaniTech_2DAnimatorController : MonoBehaviour
             case DaniTech_EntityAnimState.Idle:
                 ResetAllAnimParameters();
                 break;
-            case DaniTech_EntityAnimState.Walk:
-                Animator_Entity.SetBool("IsWalk", true);
+            case DaniTech_EntityAnimState.Move:
+                Animator_Entity.SetBool("IsMove", true);
                 break;
             case DaniTech_EntityAnimState.Atk:
                 Animator_Entity.SetTrigger("IsAtk");
+                break;
+            case DaniTech_EntityAnimState.TakeDamage:
+                Animator_Entity.SetBool("IsTakeDamage", true);
                 break;
             default:
                 // 의도되지 않은 상황이라면 모든 파라미터를 초기화한다
@@ -46,10 +50,7 @@ public class DaniTech_2DAnimatorController : MonoBehaviour
 
     private void ResetAllAnimParameters()
     {
-        Animator_Entity.SetBool("IsWalk", false);
+        Animator_Entity.SetBool("IsMove", false);
+        Animator_Entity.SetBool("IsTakeDamage", false);
     } 
-
-
-
-
 }

@@ -20,6 +20,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     // 우선 직접 들고 있다가 추후에 UI매니저한테 요청하도록 개선해볼 것
     [SerializeField] private DaniTech_ScoreUI _scoreUI;
+    [SerializeField] private CarrotScoreUI _carrotUI;
+
 
     private Rigidbody2D _rigidBody;
     private bool _isGrounded;
@@ -28,6 +30,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     // 추후에는 이런 데이터가 저장될 수 있도록 UI에 있는 것보다 한곳으로 모여지는게 좋다
     private int _currentScore;
+    private int _currentCarrot;
 
     void Awake()
     {
@@ -60,7 +63,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         // 이동을 한다라는 판정만 우선 해봅시다
         bool isMoving = (_horizontalInput != 0);
-        ChangePlayerState(isMoving ? DaniTech_EntityAnimState.Walk : DaniTech_EntityAnimState.Idle);
+        ChangePlayerState(isMoving ? DaniTech_EntityAnimState.Move : DaniTech_EntityAnimState.Idle);
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -150,5 +153,34 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         _currentScore++;
         _scoreUI.AddGameScore(_currentScore);
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.gameObject.CompareTag("Player") == false)
+        {
+            return;
+        }
+
+        var carrotComponent = trigger.gameObject.GetComponent<DaniTech_2DFieldObject>();
+        if (carrotComponent == null)
+        {
+            Debug.Log($"충돌한 객체에서 컴포넌트를 찾을 수 없습니다 : {gameObject.name}");
+            return;
+        }
+        AddCarrotScore();
+    }
+
+    private void AddCarrotScore()
+    {
+        // 7) 여기서 맥락 -> UI를 갱신해주기 위해 과연 플레이어가 이렇게 UI를 직접
+        // 알고 있는게 좋은걸까?
+
+        _currentCarrot++;
+        _carrotUI.AddCarrotScore(_currentCarrot);
+        if (_currentCarrot >= 5)
+        {
+            DaniTechUIManager.Instance.OpenEndingUI();
+        }
     }
 }

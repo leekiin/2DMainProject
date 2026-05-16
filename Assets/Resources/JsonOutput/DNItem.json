@@ -48,5 +48,15 @@
     "MaxStackCount": 20,
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Box_1"
+  },
+  {
+    "Id": "Item_Carrot_1",
+    "Name": "당근",
+    "Description": "당근. 먹으면 기분이 좋아진다.",
+    "ItemType": "Normal",
+    "Grade": "Normal",
+    "MaxStackCount": 20,
+    "SellingPrice": 100,
+    "IconPath": "Icon/Icon_Item_Carrot"
   }
 ]

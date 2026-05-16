@@ -37,5 +37,17 @@
     "DropItemDataId": "Item_Potato_1",
     "IconPath": null,
     "PrefabPath": "2DPrefab/Harvest_Potato"
+  },
+  {
+    "Id": "harv_carrot_1",
+    "FieldObjectType": "Harvest",
+    "Name": "당근",
+    "Description": "맛있는 당근. 먹으면 기분이 좋아진다.",
+    "DropCountRange": [
+      1
+    ],
+    "DropItemDataId": "Item_Carrot_1",
+    "IconPath": null,
+    "PrefabPath": "2DPrefab/Harvest_Carrot"
   }
 ]

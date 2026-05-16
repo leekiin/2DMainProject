@@ -14,7 +14,18 @@ public class DaniTech_DialogueUI : DaniTechUIBase
 
     private void OnEnable()
     {
-        Button_Next.BindOnClickButtonEvent(OnClick_Next);
+        if (Button_Next != null)
+        {
+            Button_Next.BindOnClickButtonEvent(OnClick_Next);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (Button_Next != null)
+        {
+            Button_Next.UnBindOnClickButtonEvent(OnClick_Next);
+        }
     }
 
     // 다이얼로그에서 Next 버튼이 눌러질때 호출된다

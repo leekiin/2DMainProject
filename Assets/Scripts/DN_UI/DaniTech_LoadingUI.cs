@@ -10,7 +10,6 @@ public class DaniTech_LoadingUI : DaniTechUIBase
     [SerializeField] private RawImage RawImage_LoadingImg;
     [SerializeField] private Slider Slider_LoadingBar;
     [SerializeField] private Image Image_SliderColor;
-    [SerializeField] private UnityEngine.Color[] ColorArray_LoadingBar;
 
     private CancellationTokenSource _cancelToken;
     float[] _pausePoints = { 0.1f, 0.1f, 0.1f };
@@ -24,21 +23,12 @@ public class DaniTech_LoadingUI : DaniTechUIBase
 
     private void LoadAndSetLoadingImg()
     {
-        int randomIdx = UnityEngine.Random.Range(0, 2);
-
         string texturePath = string.Empty;
-        switch (randomIdx)
-        {
-            case 0:
-                texturePath = "Texture2D/Texture2D_Loading_1";
-                break;
-            case 1:
-                texturePath = "Texture2D/Texture2D_Loading_2";
-                break;
-        }
+        
+        texturePath = "Texture2D/Texture2D_Loading_3";
 
         DaniTechGameUtil.LoadAndSetTexture(RawImage_LoadingImg, texturePath).Forget();
-        StartLoadingResouce(0.5f).Forget();
+        StartLoadingResouce(1.5f).Forget();
     }
 
     private async UniTaskVoid StartLoadingResouce(float duration)
@@ -67,7 +57,6 @@ public class DaniTech_LoadingUI : DaniTechUIBase
             }
 
             Slider_LoadingBar.value = progress;
-            ChangeColorByLoadingBarValue(progress);
 
             // 3. 다음 프레임까지 대기 (매 프레임 갱신)
             await UniTask.Yield(PlayerLoopTiming.Update, _cancelToken.Token);
@@ -78,23 +67,4 @@ public class DaniTech_LoadingUI : DaniTechUIBase
         DaniTechUIManager.Instance.CloseLoadingUI();
     }
 
-    private void ChangeColorByLoadingBarValue(float curValue)
-    {
-        if (curValue > 0.8)
-        {
-            Image_SliderColor.color = ColorArray_LoadingBar.Length >= 4 ? ColorArray_LoadingBar[3] : Color.white;
-        }
-        else if(curValue > 0.6)
-        {
-            Image_SliderColor.color = ColorArray_LoadingBar.Length >= 3 ? ColorArray_LoadingBar[2] : Color.white;
-        }
-        else if (curValue > 0.4)
-        {
-            Image_SliderColor.color = ColorArray_LoadingBar.Length >= 2 ? ColorArray_LoadingBar[1] : Color.white;
-        }
-        else
-        {
-            Image_SliderColor.color = ColorArray_LoadingBar.Length >= 1 ? ColorArray_LoadingBar[0] : Color.white;
-        }
-    }
 }

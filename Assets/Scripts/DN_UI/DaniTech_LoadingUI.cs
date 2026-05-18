@@ -28,7 +28,7 @@ public class DaniTech_LoadingUI : DaniTechUIBase
         texturePath = "Texture2D/Texture2D_Loading_3";
 
         DaniTechGameUtil.LoadAndSetTexture(RawImage_LoadingImg, texturePath).Forget();
-        StartLoadingResouce(1.5f).Forget();
+        StartLoadingResouce(1.0f).Forget();
     }
 
     private async UniTaskVoid StartLoadingResouce(float duration)

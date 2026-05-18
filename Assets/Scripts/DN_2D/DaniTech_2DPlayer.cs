@@ -181,6 +181,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
         if (_currentCarrot >= 5)
         {
             DaniTechUIManager.Instance.OpenEndingUI();
+            _currentCarrot = 0;
         }
     }
 }

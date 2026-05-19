@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySlime2D
   SpriteRenderer_Enemy: {fileID: 7247050848986577882}
   moveSpeed: 2
-  AnimatorController_Entity: {fileID: 0}
+  AnimatorController_Entity: {fileID: 2290742624965554110}
 --- !u!95 &423926647741980419
 Animator:
   serializedVersion: 7

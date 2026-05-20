@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEditor.AddressableAssets.BuildReportVisualizer;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,10 +19,14 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [Header("애니메이터")]
     [SerializeField] private DaniTech_2DAnimatorController AnimatorController_Entity;
 
+    [Header("스킬")]
+    [SerializeField] private Collider2D Collider_PlayerNormalAttack;
+    [SerializeField] private GameObject Prefab_SkillProjectile;
+    [SerializeField] private Transform Transform_SkillProjectileRoot;
 
+    //[SerializeField] private DaniTech_ScoreUI _scoreUI;
 
-    // 우선 직접 들고 있다가 추후에 UI매니저한테 요청하도록 개선해볼 것
-    [SerializeField] private DaniTech_ScoreUI _scoreUI;
+    [Header("점수UI")]
     [SerializeField] private CarrotScoreUI _carrotUI;
 
 
@@ -27,10 +34,20 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private bool _isGrounded;
     private float _horizontalInput;
     private bool _lookRight = true;
+    private bool _isSkillUsing = false;
 
-    // 추후에는 이런 데이터가 저장될 수 있도록 UI에 있는 것보다 한곳으로 모여지는게 좋다
-    private int _currentScore;
+    //private int _currentScore;
     private int _currentCarrot;
+
+    // 스킬 관련 ====================================================
+    public enum ViewType { SideView, TopDown, Isometric }
+    public ViewType _currentView = ViewType.SideView;
+    public Vector2 _lookDirection = Vector2.right;
+
+    private Vector2 _lastOverlapOffset;
+    private float _lastOverlapRadius;
+    //private bool _isOverlapSkillVisible = false;
+
 
     void Awake()
     {
@@ -38,6 +55,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         // 2D 캐릭터가 물리 충돌 시 회전해서 넘어지는 것 방지
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        Collider_PlayerNormalAttack.gameObject.SetActive(false);
     }
 
     void Update()
@@ -67,7 +85,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ChangePlayerState(DaniTech_EntityAnimState.Atk);
+            UseNormalAttack();
         }
 
     }
@@ -110,15 +128,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
-    private void OnDrawGizmos()
-    {
-        if (_groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
-        }
-    }
+    
 
     // 6) 적 충돌 시 처리를 해보자
     private void OnCollisionEnter2D(Collision2D collision)
@@ -143,17 +153,17 @@ public class DaniTech_2DPlayer : MonoBehaviour
         DaniTechGameObjectManager.Inst.RequestDestroyEntityObject(enemyComponent.EntityInstancId);
 
         // 6-4) 피그미를 잡으면 스코어를 올려주자!
-        AddGameScore();
+        //AddGameScore();
     }
 
-    private void AddGameScore()
-    {
-        // 7) 여기서 맥락 -> UI를 갱신해주기 위해 과연 플레이어가 이렇게 UI를 직접
-            // 알고 있는게 좋은걸까?
+    //private void AddGameScore()
+    //{
+    //     7) 여기서 맥락 -> UI를 갱신해주기 위해 과연 플레이어가 이렇게 UI를 직접
+    //        // 알고 있는게 좋은걸까?
 
-        _currentScore++;
-        _scoreUI.AddGameScore(_currentScore);
-    }
+    //    _currentScore++;
+    //    _scoreUI.AddGameScore(_currentScore);
+    //}
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
@@ -183,5 +193,111 @@ public class DaniTech_2DPlayer : MonoBehaviour
             DaniTechUIManager.Instance.OpenEndingUI();
             _currentCarrot = 0;
         }
+    }
+
+    public bool CheckSkillUseable(bool isShowMsg = true)
+    {
+        if (_isSkillUsing == true)
+        {
+            if (isShowMsg == true)
+            {
+                DaniTechUIManager.Instance.OpenSimplePopup("스킬이 아직 사용 중입니다.");
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void UseNormalAttack()
+    {
+        if (CheckSkillUseable(isShowMsg:false) == false) return;
+        _isSkillUsing = true;
+        ChangePlayerState(DaniTech_EntityAnimState.Atk);
+        StartCoroutine(CoStartNormalAttack());
+    }
+
+    public void UseFirstSkill()
+    {
+        if(CheckSkillUseable() == false) return;
+        UseOverlapSkill(new Vector2(5.0f, 0.0f), 3.0f);
+    }
+
+    public void UseSecondSkill()
+    {
+        if (CheckSkillUseable() == false) return;
+    }
+
+    public void UseThirdSkill()
+    {
+        if (CheckSkillUseable() == false) return;
+        CreatePorjectileSkillObject();
+    }
+
+    private void CreatePorjectileSkillObject()
+    {
+        var gObj = Instantiate(Prefab_SkillProjectile, Transform_SkillProjectileRoot);
+        if (gObj == null) return;
+        
+        var skillProjectileComponent = gObj.GetComponent<SkillProjectile>();
+        if (skillProjectileComponent == null) return;
+
+        skillProjectileComponent.InitSkillObject(_lookRight, this.transform.position, 100);
+    }
+
+    IEnumerator CoStartNormalAttack()
+    {
+        Collider_PlayerNormalAttack.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        Collider_PlayerNormalAttack.gameObject.SetActive(false);
+        _isSkillUsing = false;
+    }
+
+    private Vector2 GetAdjustDirection(Vector2 rawDir)
+    {
+        switch (_currentView)
+        {
+            case ViewType.Isometric:
+                return new Vector2((rawDir.x - rawDir.y) * 0.5f, (rawDir.x + rawDir.y) * 0.5f).normalized;
+            case ViewType.SideView:
+                rawDir = _lookRight ? Vector2.right : Vector2.left;
+                return new Vector2(rawDir.x, 0).normalized;
+            case ViewType.TopDown:
+            default:
+                return rawDir.normalized;
+        }
+    }
+
+    public void UseOverlapSkill(Vector2 offsetPosition, float radius)
+    {
+        _lastOverlapOffset = offsetPosition;
+        _lastOverlapRadius = radius;
+
+        Vector2 adjustedDir = GetAdjustDirection(_lookDirection);
+        Vector2 center = (Vector2)transform.position + new Vector2(adjustedDir.x * offsetPosition.x, adjustedDir.y * offsetPosition.y);
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(center, radius);
+
+        foreach (Collider2D col in hitColliders)
+        {
+            if (col != null && col.gameObject != this.gameObject)
+            {
+                Debug.Log($"오버랩 스킬 적중 : {col.name}");
+            }
+        }
+    }
+
+    // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
+    private void OnDrawGizmos()
+    {
+        if (_groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
+        }
+
+        Gizmos.color = new Color(1f, 1f, 0f, 0.5f);
+        Vector2 adjustedDir = GetAdjustDirection(_lookDirection);
+        Vector3 center = transform.position + new Vector3(adjustedDir.x * _lastOverlapOffset.x, adjustedDir.y * _lastOverlapOffset.y, 0); // 예시로 offsetPosition을 (1, 0)으로 설정
+        Gizmos.DrawSphere(center, _lastOverlapRadius);
     }
 }

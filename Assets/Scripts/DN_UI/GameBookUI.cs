@@ -59,9 +59,9 @@ public class GameBookUI : DaniTechUIBase
             CreateGameBookSlot(data.Id);
         }
 
-        //if(_slotList.Count > 0)
+        //if (_slotList.Count > 0)
         //{
-        //    foreach(var slotKv in _slotList)
+        //    foreach (var slotKv in _slotList)
         //    {
         //        var slot = slotKv.Value;
         //        slot.OnClick_GameBookSlot();

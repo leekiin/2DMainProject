@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillProjectile
   SpriteRenderer_Effect: {fileID: 5588356170741822682}
+  ProjecTileSpeed: 5
 --- !u!50 &5037202333405444234
 Rigidbody2D:
   serializedVersion: 5
@@ -228,7 +229,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

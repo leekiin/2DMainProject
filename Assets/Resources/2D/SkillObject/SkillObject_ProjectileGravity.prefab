@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillProjectile
   SpriteRenderer_Effect: {fileID: 5588356170741822682}
+  ProjecTileSpeed: 5
 --- !u!50 &5037202333405444234
 Rigidbody2D:
   serializedVersion: 5
@@ -154,7 +155,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

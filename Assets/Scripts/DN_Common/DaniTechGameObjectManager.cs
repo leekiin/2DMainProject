@@ -16,6 +16,7 @@ public class DaniTechGameObjectManager : MonoBehaviour
     // 생성된 오브젝트의 생명을 보관
     private Dictionary<int, GameObject> _createdGameObjectContainer = new Dictionary<int, GameObject>();
     private Dictionary<int, DaniTech_2DFieldObject> _fieldObjectContainer = new Dictionary<int, DaniTech_2DFieldObject>();
+    private Dictionary<int, GameMonster> _monsterObjectContainer = new Dictionary<int, GameMonster>();    
 
     private void Awake()
     {
@@ -94,6 +95,30 @@ public class DaniTechGameObjectManager : MonoBehaviour
         Destroy(gObj);
     }
 
+    //[몬스터] ====================================================================================================
+
+    public async UniTaskVoid CreateMonsterObject(string monsterDataId, Transform spawnSpot)
+    {
+        var monsterData = DaniTechGameDataManager.Instance.GetDNMonsterData(monsterDataId);
+        if (monsterData == null) return;
+
+        var createdObj = await DaniTechResourceManager.Inst.InstantiateAsync(monsterData.PrefabPath, Root_Enemy, true);
+        createdObj.transform.position = spawnSpot.position;
+        AddMonsterOnCreate(createdObj, monsterDataId);
+    }
+
+    private void AddMonsterOnCreate(GameObject createdObject, string monsterDataId)
+    {
+       _objectInstanceKeyGenerator++;
+        int generatedInstanceId = _objectInstanceKeyGenerator;
+        var monsterComponent = createdObject.GetComponent<GameMonster>();
+
+        if(monsterComponent == null) return;
+
+        _monsterObjectContainer.Add(generatedInstanceId, monsterComponent);
+        monsterComponent.InitMonster(generatedInstanceId, monsterDataId);
+    }
+
     //[필드 오브젝트] ====================================================================================================
 
     public async UniTaskVoid CreateFieldObject(string fieldObjectDataId, Transform spawnSpot)
@@ -110,7 +135,7 @@ public class DaniTechGameObjectManager : MonoBehaviour
     private void AddFieldObjectOnCreate(GameObject createdObject, string fieldObjectDataId)
     {
         _objectInstanceKeyGenerator++;
-        var generatedInstanceId = _objectInstanceKeyGenerator;
+        int generatedInstanceId = _objectInstanceKeyGenerator;
         var fieldObject = createdObject.GetComponent<DaniTech_2DFieldObject>();
 
         if(fieldObject != null)

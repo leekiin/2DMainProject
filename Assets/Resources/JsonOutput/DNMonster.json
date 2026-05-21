@@ -10,7 +10,7 @@
       2
     ],
     "IconPath": "Icon/Icon_ slime",
-    "PrefabPath": "2DObject/MonsterSlime"
+    "PrefabPath": "2DObject/Monster_Slime"
   },
   {
     "Id": "mob_dog_1",
@@ -35,7 +35,7 @@
     "PrefabPath": null
   },
   {
-    "Id": "mob_bear",
+    "Id": "mob_bear_1",
     "Name": "곰",
     "Description": "쮸쀼쮸쀼",
     "BaseHp": 1000,
@@ -47,5 +47,60 @@
     ],
     "IconPath": "Icon/Icon_Bear",
     "PrefabPath": "2DObject/Monster_Bear"
+  },
+  {
+    "Id": "mob_bat_1",
+    "Name": null,
+    "Description": null,
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
+    "IconPath": null,
+    "PrefabPath": null
+  },
+  {
+    "Id": "mob_helldog_1",
+    "Name": null,
+    "Description": null,
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
+    "IconPath": null,
+    "PrefabPath": null
+  },
+  {
+    "Id": "mob_frog_1",
+    "Name": null,
+    "Description": null,
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
+    "IconPath": null,
+    "PrefabPath": null
+  },
+  {
+    "Id": "mob_eagle_1",
+    "Name": null,
+    "Description": null,
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
+    "IconPath": null,
+    "PrefabPath": null
+  },
+  {
+    "Id": "mob_vulture_1",
+    "Name": null,
+    "Description": null,
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
+    "IconPath": null,
+    "PrefabPath": null
   }
 ]

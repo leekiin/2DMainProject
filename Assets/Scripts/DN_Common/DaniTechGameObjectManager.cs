@@ -94,11 +94,6 @@ public class DaniTechGameObjectManager : MonoBehaviour
         Destroy(gObj);
     }
 
-
-
-
-
-
     //[필드 오브젝트] ====================================================================================================
 
     public async UniTaskVoid CreateFieldObject(string fieldObjectDataId, Transform spawnSpot)

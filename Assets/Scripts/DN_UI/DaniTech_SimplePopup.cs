@@ -42,7 +42,7 @@ public class DaniTech_SimplePopup : DaniTechUIBase
     private async UniTask UIWaitUntilNextFrame()
     {
         // 호출 후 1프레임 지난 후 어떤 작업을 해야될 때 이 로직을 사용하세요!
-        Debug.Log("이 영역에는 프레임 대기 전에 일어나야하는 작업들이 있어야 합니다");
+        //Debug.Log("이 영역에는 프레임 대기 전에 일어나야하는 작업들이 있어야 합니다");
 
         await UniTask.NextFrame();
 
@@ -50,7 +50,7 @@ public class DaniTech_SimplePopup : DaniTechUIBase
             // UI 레이아웃 갱신: LayoutGroup이나 ContentSizeFitter가 적용된 UI의 크기를 즉시 가져오면 0으로 나오는 경우가 많음.
             // 이때 한 프레임 쉬고 가져오면 정확한 크기를 알 수 있다!
 
-        Debug.Log("이 영역에는 다음 프레임에 1번 불러져야 한다면 여기서 작업");
+        //Debug.Log("이 영역에는 다음 프레임에 1번 불러져야 한다면 여기서 작업");
     }
 
 
@@ -63,7 +63,7 @@ public class DaniTech_SimplePopup : DaniTechUIBase
         }
 
         _cancelToken = new CancellationTokenSource();
-        Debug.Log("코루틴처럼 대기 상태에서 해야하는 일이 있다면 여기서 먼저 진행");
+        //Debug.Log("코루틴처럼 대기 상태에서 해야하는 일이 있다면 여기서 먼저 진행");
 
         // 지정된 시간만큼 대기
             // 취소 토큰은 꼭 필요한 것은 아니지만, 대기 시간이 긴 경우는 이 작업이 끝나기 전에

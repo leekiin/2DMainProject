@@ -60,6 +60,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 679a375b35fbbc14b939cd0f352d68e8
+    m_Address: 2DObject/Monster_HellDog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6caf508fb2c9a304cbab300f30d5cf19
     m_Address: Sound/Voice_Pug_1_I_WantToEatPizza
     m_ReadOnly: 0
@@ -112,6 +117,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8d61a3cf509c944a9072703554e32fb
     m_Address: Sound/Voice_Pug_1_success
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de536b92b9c6b48469fec34b07ae397c
+    m_Address: 2DObject/Monster_Frog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f914138b92ad8b14f9ad4492baa0ec3f
+    m_Address: 2DObject/Monster_Eagle
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

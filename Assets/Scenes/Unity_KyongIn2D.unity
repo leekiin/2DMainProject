@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 43346220}
   - component: {fileID: 43346221}
   m_Layer: 0
-  m_Name: SpawnSpot_FieldObject_Carrot
+  m_Name: SpawnSpot_FieldObject_Carrot_1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5021,6 +5021,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46238552}
   m_CullTransparentMesh: 1
+--- !u!1001 &71537876
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 214132761}
+    m_Modifications:
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180363546269119021, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: _spawnObjectDataId
+      value: mob_slim_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_Name
+      value: SpawnSpot_Monster (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
 --- !u!1 &76888177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5209,10 +5270,13 @@ Transform:
   - {fileID: 1624794614}
   - {fileID: 616231267}
   - {fileID: 345558349}
+  - {fileID: 651760291}
   - {fileID: 822183813}
   - {fileID: 357185523}
   - {fileID: 861197668}
   - {fileID: 2122328477}
+  - {fileID: 1963293196}
+  - {fileID: 1944422382}
   m_Father: {fileID: 281206933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281206932
@@ -153705,6 +153769,54 @@ MonoBehaviour:
   _startSpawnType: 2
   _spawnObjectDataId: harv_carrot_1
   Collider_OnSpawnStart: {fileID: 0}
+--- !u!1 &651760290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 651760291}
+  - component: {fileID: 651760292}
+  m_Layer: 0
+  m_Name: SpawnSpot_FieldObject_Carrot_2_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &651760291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651760290}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.5, y: -71.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 214132761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &651760292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651760290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaaac9829db648046bbd2e71dbce20f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DaniTech_SpawnSpot
+  _spawnSpotType: 1
+  _startSpawnType: 2
+  _spawnObjectDataId: harv_carrot_1
+  Collider_OnSpawnStart: {fileID: 0}
 --- !u!1 &690838268
 GameObject:
   m_ObjectHideFlags: 0
@@ -153856,7 +153968,7 @@ GameObject:
   - component: {fileID: 745292868}
   - component: {fileID: 745292869}
   m_Layer: 0
-  m_Name: SpawnSpot_FieldObject_Carrot (1)
+  m_Name: SpawnSpot_FieldObject_Carrot_1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154032,7 +154144,7 @@ GameObject:
   - component: {fileID: 803807756}
   m_Layer: 6
   m_Name: Tilemap_Ground
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171682,7 +171794,7 @@ GameObject:
   - component: {fileID: 812040342}
   - component: {fileID: 812040343}
   m_Layer: 0
-  m_Name: SpawnSpot_FieldObject_Carrot (3)
+  m_Name: SpawnSpot_FieldObject_Carrot_1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171976,7 +172088,7 @@ GameObject:
   - component: {fileID: 1474589094}
   - component: {fileID: 1474589095}
   m_Layer: 0
-  m_Name: SpawnSpot_FieldObject_Carrot (4)
+  m_Name: SpawnSpot_FieldObject_Carrot_1_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172079,7 +172191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1537213384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172175,11 +172287,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.44
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.75
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -172685,6 +172797,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &1944422382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+  m_PrefabInstance: {fileID: 71537876}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1944831210
 GameObject:
   m_ObjectHideFlags: 0
@@ -172840,6 +172957,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959571702}
   m_CullTransparentMesh: 1
+--- !u!4 &1963293196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+  m_PrefabInstance: {fileID: 2054209483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2014678434
 GameObject:
   m_ObjectHideFlags: 0
@@ -172851,7 +172973,7 @@ GameObject:
   - component: {fileID: 2014678435}
   - component: {fileID: 2014678436}
   m_Layer: 0
-  m_Name: SpawnSpot_FieldObject_Carrot (2)
+  m_Name: SpawnSpot_FieldObject_Carrot_1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172888,6 +173010,67 @@ MonoBehaviour:
   _startSpawnType: 2
   _spawnObjectDataId: harv_carrot_1
   Collider_OnSpawnStart: {fileID: 0}
+--- !u!1001 &2054209483
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 214132761}
+    m_Modifications:
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -28.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180363546269119021, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: _spawnObjectDataId
+      value: mob_slim_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_Name
+      value: SpawnSpot_Monster (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
 --- !u!4 &2122328477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
@@ -172954,6 +173137,8 @@ MonoBehaviour:
   Collider_PlayerNormalAttack: {fileID: 1337354878}
   Prefab_SkillProjectile: {fileID: 6367772490329889367, guid: f8ff94b53cc674a43928f61c102b72cb, type: 3}
   Transform_SkillProjectileRoot: {fileID: 1775303399}
+  _playerHp: 1000
+  _playerBaseAtk: 100
   _carrotUI: {fileID: 857427696}
   _currentView: 0
   _lookDirection: {x: 1, y: 0}

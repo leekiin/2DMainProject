@@ -18,7 +18,8 @@ public class GameMonster : MonsterBase
     public int _baseHp;
     public int _baseAtk;
     public bool _isAlive = true;
-    public bool _lookRight = true;
+    private bool _lookRight = true;
+
     private Vector3 _moveDirection;
 
 
@@ -40,6 +41,11 @@ public class GameMonster : MonsterBase
             _baseAtk = _monsterData.BaseAtk;
         }
         StartCoroutine(CheckAndUseSkill());
+    }
+
+    public int GetMonsterInstanceId()
+    {
+        return _instanceId;
     }
 
     private int GetFinalNormalAttackDamage(int baseAtk, float normalAttackMultiple)
@@ -90,8 +96,36 @@ public class GameMonster : MonsterBase
 
         float skillMultiple = _monsterData.SkillAtkMultipleList.Count > 0 ? _monsterData.SkillAtkMultipleList[0] : 0;
         int finalSkillDamage = GetFinalSkillDamage(_monsterData.BaseAtk, skillMultiple);
-        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage);
+        var tag = this.gameObject.tag;
+
+        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage, tag, OnSkillCollision);
     }
 
+    private void OnSkillCollision(int colliedObjectInstanceId, int damage)
+    {
+        if(colliedObjectInstanceId == 0)
+        {
+            var localPlayer = DaniTechGameObjectManager.Inst.GetLocalPlayer();
+
+            //float skillMultiple = _monsterData.SkillAtkMultipleList.Count > 0 ? _monsterData.SkillAtkMultipleList[0] : 0;
+            //int finalSkillDamage = GetFinalSkillDamage(_monsterData.BaseAtk, skillMultiple);
+            //localPlayer.TakeDamage(finalSkillDamage);
+
+            localPlayer.TakeDamage(damage);
+        }
+    }
+
+    public void TakeDamage(int playerDamage)
+    {
+        _baseHp -= playerDamage;
+
+        
+
+        if(_baseHp <= 0)
+        {
+            _baseHp = 0;
+            Destroy(this.gameObject);
+        }
+    }
 
 }

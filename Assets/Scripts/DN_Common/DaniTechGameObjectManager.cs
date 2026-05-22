@@ -16,12 +16,33 @@ public class DaniTechGameObjectManager : MonoBehaviour
     // 생성된 오브젝트의 생명을 보관
     private Dictionary<int, GameObject> _createdGameObjectContainer = new Dictionary<int, GameObject>();
     private Dictionary<int, DaniTech_2DFieldObject> _fieldObjectContainer = new Dictionary<int, DaniTech_2DFieldObject>();
-    private Dictionary<int, GameMonster> _monsterObjectContainer = new Dictionary<int, GameMonster>();    
+    private Dictionary<int, GameMonster> _monsterObjectContainer = new Dictionary<int, GameMonster>();
+
+    private DaniTech_2DPlayer _localPlayer;
+
 
     private void Awake()
     {
         Inst = this;
     }
+
+
+    public void RegisterLocalPlayer(DaniTech_2DPlayer player)
+    {
+        _localPlayer = player;
+    }
+
+    public DaniTech_2DPlayer GetLocalPlayer()
+    {
+        if(_localPlayer == null)
+        {
+            Debug.LogError("로컬 플레이어가 등록되지 않았습니다.");
+            return null;
+        }
+
+        return _localPlayer;
+    }
+
 
     public void RequestSpawnEnemy()
     {
@@ -117,6 +138,17 @@ public class DaniTechGameObjectManager : MonoBehaviour
 
         _monsterObjectContainer.Add(generatedInstanceId, monsterComponent);
         monsterComponent.InitMonster(generatedInstanceId, monsterDataId);
+    }
+
+    public GameMonster GetMonsterObjectByInstanceId(int monsterInstanceId)
+    {
+        if (_monsterObjectContainer.ContainsKey(monsterInstanceId) == false)
+        {
+            Debug.LogError($"{monsterInstanceId} 찾으려는 몬스터가 유효하지 않습니다");
+            return null;
+        }
+
+        return _monsterObjectContainer[monsterInstanceId];
     }
 
     //[필드 오브젝트] ====================================================================================================

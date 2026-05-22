@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using UnityEditor.AddressableAssets.BuildReportVisualizer;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
 [RequireComponent(typeof(Rigidbody2D))]
@@ -26,6 +24,10 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     //[SerializeField] private DaniTech_ScoreUI _scoreUI;
 
+    [Header("전투 관련 정보")]
+    [SerializeField] private int _playerHp = 1000;
+    [SerializeField] private int _playerBaseAtk = 100;
+
     [Header("점수UI")]
     [SerializeField] private CarrotScoreUI _carrotUI;
 
@@ -47,7 +49,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private Vector2 _lastOverlapOffset;
     private float _lastOverlapRadius;
     //private bool _isOverlapSkillVisible = false;
-
+    
 
     void Awake()
     {
@@ -56,6 +58,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
         // 2D 캐릭터가 물리 충돌 시 회전해서 넘어지는 것 방지
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         Collider_PlayerNormalAttack.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
     }
 
     void Update()
@@ -241,7 +248,17 @@ public class DaniTech_2DPlayer : MonoBehaviour
         var skillProjectileComponent = gObj.GetComponent<SkillProjectile>();
         if (skillProjectileComponent == null) return;
 
-        skillProjectileComponent.InitSkillObject(0, _lookRight, this.transform.position, 100);
+        var tag = this.gameObject.tag;
+        skillProjectileComponent.InitSkillObject(0, _lookRight, this.transform.position, _playerBaseAtk, tag, OnMonsterCollied);
+    }
+
+    private void OnMonsterCollied(int monsterInstanceId, int skilldamage)
+    {
+        var monsterComponent = DaniTechGameObjectManager.Inst.GetMonsterObjectByInstanceId(monsterInstanceId);
+        if (monsterComponent == null) return;
+
+        Debug.LogWarning($"플레이어가 몬스터 {monsterInstanceId}에게 스킬 데미지 {skilldamage}를 입혔습니다.");
+        monsterComponent.TakeDamage(skilldamage);
     }
 
     IEnumerator CoStartNormalAttack()
@@ -284,6 +301,24 @@ public class DaniTech_2DPlayer : MonoBehaviour
                 Debug.Log($"오버랩 스킬 적중 : {col.name}");
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _playerHp -= damage;
+
+        if (_playerHp <= 0)
+        {
+            _playerHp = 0;
+            PlayerDie();
+            return;
+        }
+
+    }
+
+    public void PlayerDie()
+    {
+
     }
 
     // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인

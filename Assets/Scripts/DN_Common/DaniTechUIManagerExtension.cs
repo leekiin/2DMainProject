@@ -21,7 +21,8 @@ public enum DaniTechUIType
     DNInfoBookUI,
     EndingUI,
     RobbyUI,
-    GameBookUI
+    GameBookUI,
+    HudUI
 }
 
 public static class DaniTechUIManagerExtension
@@ -41,8 +42,8 @@ public static class DaniTechUIManagerExtension
         uiManager.OpenRobbyUI();
         //uiManager.OpenContentUI(DaniTechUIType.RobbyUI);
         //uiManager.OpenUI(DaniTechUIRootType.ContentUI, DaniTechUIType.RobbyUI);
-
-        //uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.DNMainUI);
+        uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
+        uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.DNMainUI);
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
     }
@@ -144,5 +145,31 @@ public static class DaniTechUIManagerExtension
     {
         uiManager.CloseUI(DaniTechUIRootType.ContentUI, DaniTechUIType.RobbyUI);
     }
+
+    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId, Transform targetTransform, string characterName)
+    {
+        var uiBase = uiManager.GetOpenedUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
+        if (uiBase == null) return;
+
+        if(uiBase is HudUI hudUI)
+        {
+            hudUI.AddHudSlot(instanceId, targetTransform, characterName);
+        }
+    }
+
+    public static void RemoveHudSlot(this DaniTechUIManager uiManager, int instanceId)
+    {
+        var uiBase = uiManager.GetOpenedUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
+        if (uiBase == null) return;
+
+        if (uiBase is HudUI hudUI)
+        {
+            hudUI.RemoveHudSlot(instanceId);
+        }
+    }
+
+
+
+
 }
 

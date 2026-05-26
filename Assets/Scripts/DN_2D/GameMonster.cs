@@ -19,8 +19,13 @@ public class GameMonster : MonsterBase
     public int _baseAtk;
     public bool _isAlive = true;
     private bool _lookRight = true;
+    private int _maxHp; 
+    private string _monsterName = "몬스터";
 
     private Vector3 _moveDirection;
+
+    private event Action<int, int> _onHpChanged;
+    private event Action<int, int> _onMpChanged;
 
 
     private void OnDisable()
@@ -38,8 +43,11 @@ public class GameMonster : MonsterBase
         {
             _monsterData = monsterData;
             _baseHp = _monsterData.BaseHp;
+            _maxHp = _baseHp;
             _baseAtk = _monsterData.BaseAtk;
         }
+
+        DaniTechUIManager.Instance.AddHudSlot(_instanceId, this.gameObject.transform, _monsterName);
         StartCoroutine(CheckAndUseSkill());
     }
 
@@ -119,13 +127,33 @@ public class GameMonster : MonsterBase
     {
         _baseHp -= playerDamage;
 
-        
+        Debug.LogWarning($"몬스터가 {playerDamage}의 데미지를 입었습니다. 남은 체력: {_baseHp}");
 
-        if(_baseHp <= 0)
+        if (_baseHp <= 0)
         {
             _baseHp = 0;
             Destroy(this.gameObject);
+            DaniTechUIManager.Instance.RemoveHudSlot(_instanceId);
         }
+        InvokeStatChangedEvent();
+    }
+
+    public void BindOnStatChangedEvent(Action<int, int> hpChangeCallback, Action<int, int> mpChangeCallback)
+    {
+        _onHpChanged += hpChangeCallback;
+        _onMpChanged += mpChangeCallback;
+    }
+
+    public void ResetStatChangedEvent()
+    {
+        _onHpChanged = null;
+        _onMpChanged = null;
+    }
+
+    private void InvokeStatChangedEvent()
+    {
+        _onHpChanged?.Invoke(_baseHp, _maxHp);
+        //_onMpChanged?.Invoke(_playerMp);
     }
 
 }

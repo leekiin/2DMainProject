@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
@@ -25,6 +26,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     //[SerializeField] private DaniTech_ScoreUI _scoreUI;
 
     [Header("전투 관련 정보")]
+    [SerializeField] private int _maxHp = 1000;
     [SerializeField] private int _playerHp = 1000;
     [SerializeField] private int _playerBaseAtk = 100;
 
@@ -37,6 +39,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private float _horizontalInput;
     private bool _lookRight = true;
     private bool _isSkillUsing = false;
+    private string _characterName = "보팔레빗";
 
     //private int _currentScore;
     private int _currentCarrot;
@@ -49,7 +52,10 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private Vector2 _lastOverlapOffset;
     private float _lastOverlapRadius;
     //private bool _isOverlapSkillVisible = false;
-    
+
+    private event Action<int, int> _onHpChanged;
+    private event Action<int, int> _onMpChanged;
+
 
     void Awake()
     {
@@ -58,11 +64,14 @@ public class DaniTech_2DPlayer : MonoBehaviour
         // 2D 캐릭터가 물리 충돌 시 회전해서 넘어지는 것 방지
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         Collider_PlayerNormalAttack.gameObject.SetActive(false);
+
+        _playerHp = _maxHp;
     }
 
     private void Start()
     {
         DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
+        DaniTechUIManager.Instance.AddHudSlot(0, this.gameObject.transform, _characterName);
     }
 
     void Update()
@@ -143,21 +152,21 @@ public class DaniTech_2DPlayer : MonoBehaviour
         // 6-1) 플레이어의 > 콜리전에 충돌한 객체가 어떤 Tag인지 1차 검사한다.
             // 지면 같은 오브젝트와 점프시 충돌이 계속 오므로 이렇게 태그로 먼저 비교하는게 좋다
             // 중단점을 찍어보면서 확인 추천
-        if (collision.gameObject.CompareTag("Enemy") == false)
-        {
-            return;
-        }
+        //if (collision.gameObject.CompareTag("Enemy") == false)
+        //{
+        //    return;
+        //}
 
-        // 6-2) 충돌한 몬스터의 정보를 받아오려고 시도해보자
-        var enemyComponent = collision.gameObject.GetComponent<DaniTech_2DEnemy>();
-        if (enemyComponent == null)
-        {
-            Debug.Log($"충돌한 적 객체에서 컴포넌트를 찾을 수 없습니다 : {gameObject.name}");
-            return;
-        }
+        //// 6-2) 충돌한 몬스터의 정보를 받아오려고 시도해보자
+        //var enemyComponent = collision.gameObject.GetComponent<GameMonster>();
+        //if (enemyComponent == null)
+        //{
+        //    Debug.Log($"충돌한 적 객체에서 컴포넌트를 찾을 수 없습니다 : {gameObject.name}");
+        //    return;
+        //}
 
         // 6-3) 충돌된 오브젝트를 플레이어가 직접 제거하는게 아니라, Id로 게임오브젝트매니저한테 삭제를 요청한다
-        DaniTechGameObjectManager.Inst.RequestDestroyEntityObject(enemyComponent.EntityInstancId);
+        //DaniTechGameObjectManager.Inst.RequestDestroyEntityObject(enemyComponent.GetMonsterInstanceId());
 
         // 6-4) 피그미를 잡으면 스코어를 올려주자!
         //AddGameScore();
@@ -174,7 +183,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (trigger.gameObject.CompareTag("Player") == false)
+        if (trigger.gameObject.CompareTag("Carrot") == false)
         {
             return;
         }
@@ -307,6 +316,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
     {
         _playerHp -= damage;
 
+        Debug.LogWarning($"플레이어가 {damage}의 데미지를 입었습니다. 남은 HP: {_playerHp}");
+
         if (_playerHp <= 0)
         {
             _playerHp = 0;
@@ -314,12 +325,34 @@ public class DaniTech_2DPlayer : MonoBehaviour
             return;
         }
 
+        InvokeStatChangedEvent();
+
     }
 
     public void PlayerDie()
     {
+        DaniTechUIManager.Instance.RemoveHudSlot(0);
 
     }
+
+    public void BindOnStatChangedEvent(Action<int, int> hpChangeCallback, Action<int, int> mpChangeCallback)
+    {
+        _onHpChanged += hpChangeCallback;
+        _onMpChanged += mpChangeCallback;
+    }
+
+    public void ResetStatChangedEvent()
+    {
+        _onHpChanged = null;
+        _onMpChanged = null;
+    }
+
+    private void InvokeStatChangedEvent()
+    {
+        _onHpChanged?.Invoke(_playerHp, _maxHp);
+        //_onMpChanged?.Invoke(_playerMp);
+    }
+
 
     // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
     private void OnDrawGizmos()

@@ -8,6 +8,8 @@ TagManager:
   - Map
   - Enemy
   - SkillObject
+  - Harvest
+  - Carrot
   layers:
   - Default
   - TransparentFX

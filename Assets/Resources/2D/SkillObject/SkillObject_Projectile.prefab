@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillProjectile
   SpriteRenderer_Effect: {fileID: 5588356170741822682}
+  ProjecTileSpeed: 5
+  ProjecTileSecond: 10
 --- !u!50 &5037202333405444234
 Rigidbody2D:
   serializedVersion: 5
@@ -165,7 +167,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8839178807421694955
 GameObject:
   m_ObjectHideFlags: 0

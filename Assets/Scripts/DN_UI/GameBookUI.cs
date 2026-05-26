@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 
+public enum EGameBookCategory
+{
+    None= 0,
+    ItemCategory,
+    MonsterCategory,
+    HarvestCategory
+}
 
 public class GameBookUI : DaniTechUIBase
 {
@@ -17,6 +24,11 @@ public class GameBookUI : DaniTechUIBase
     //[Header("부가 정보")]
     //[SerializeField] private GameObject Layout_SubInfoSkill;
 
+    [Header("상단 카테고리")]
+    [SerializeField] private DaniTechUIButton Btn_ItemCategory;
+    [SerializeField] private DaniTechUIButton Btn_MonsterCategory;
+    [SerializeField] private DaniTechUIButton Btn_HarvestCategory;
+
     [Header("슬롯 리스트 영역")]
     [SerializeField] private Transform Transform_SlotRoot;
 
@@ -30,9 +42,11 @@ public class GameBookUI : DaniTechUIBase
     {
         Btn_CloseSelf.BindOnClickButtonEvent(OnClick_CloseGameBookUI);
         Btn_CloseAll.BindOnClickButtonEvent(OnClick_CloseGameBookUI);
+        Btn_ItemCategory.BindOnClickButtonEvent(OnClick_ItemCategory);
+        Btn_MonsterCategory.BindOnClickButtonEvent(OnClick_MonsterCategory);
+        Btn_HarvestCategory.BindOnClickButtonEvent(OnClick_HarvestCategory);
 
         ReadItemListAndCreateSlot();
-
     }
 
     private void OnDisable()
@@ -45,6 +59,44 @@ public class GameBookUI : DaniTechUIBase
                 DestroyImmediate(slot.gameObject);
             }
             _slotList.Clear();
+        }
+    }
+
+    public void OnClick_CloseGameBookUI()
+    {
+        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.GameBookUI);
+    }
+
+    public void OnClick_ItemCategory()
+    {
+        SetGameBookLayoutByCatrgory(EGameBookCategory.ItemCategory);
+    }
+
+    public void OnClick_MonsterCategory()
+    {
+        SetGameBookLayoutByCatrgory(EGameBookCategory.MonsterCategory);
+    }
+
+    public void OnClick_HarvestCategory()
+    {
+        SetGameBookLayoutByCatrgory(EGameBookCategory.HarvestCategory);
+    }
+
+    private void SetGameBookLayoutByCatrgory(EGameBookCategory category)
+    {
+        switch (category)
+        {
+            case EGameBookCategory.ItemCategory:
+                //아이템 카테고리 레이아웃 설정 로직 작성
+                break;
+            case EGameBookCategory.MonsterCategory:
+                //몬스터 카테고리 레이아웃 설정 로직 작성
+                break;
+            case EGameBookCategory.HarvestCategory:
+                //채집 카테고리 레이아웃 설정 로직 작성
+                break;
+            default:
+                break;
         }
     }
 
@@ -79,11 +131,6 @@ public class GameBookUI : DaniTechUIBase
 
         slotComponment.InitSlot(dataId, OnClickChildSlotSelected);
         _slotList.Add(dataId, slotComponment);
-    }
-
-    private void OnClick_CloseGameBookUI()
-    {
-        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.GameBookUI);
     }
 
     private void OnClickChildSlotSelected(string slotDataId)

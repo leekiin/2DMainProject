@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SkillProjectile : SkillBase
 {
     [SerializeField] private SpriteRenderer SpriteRenderer_Effect;
-    [SerializeField] private float ProjecTileSpeed = 5.0f;
+    [SerializeField] private float ProjecTileSpeed = 10.0f;
+    [SerializeField] private float ProjecTileSecond = 10.0f;
+
 
 
     private int _damage;
@@ -33,6 +36,7 @@ public class SkillProjectile : SkillBase
         _onSkillColision = onSkillCollision;
 
         this.gameObject.tag = parentTag;
+        StartCoroutine(DestroyAfterSeconds(ProjecTileSecond));
     }
 
     private void Update()
@@ -81,15 +85,11 @@ public class SkillProjectile : SkillBase
 
             Destroy(this.gameObject);
         }
-
     }
 
-
-
-
-
-
-
-
-
+    private IEnumerator DestroyAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
+    }
 }

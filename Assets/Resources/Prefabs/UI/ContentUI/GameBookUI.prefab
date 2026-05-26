@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 5943385811028808234}
   - component: {fileID: 9088338373901283134}
   m_Layer: 5
-  m_Name: Button_ShowItemBook
+  m_Name: Button_ItemCategory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,18 +636,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120015552470000670}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662387212994119861}
-  m_Father: {fileID: 6824736600485830982}
+  m_Father: {fileID: 285016172686817201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -718, y: -209}
-  m_SizeDelta: {x: 260, y: 140}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 260, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9088338373901283134
 MonoBehaviour:
@@ -775,7 +775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -450.00024, y: -16.000122}
+  m_AnchoredPosition: {x: -450.00024, y: -16.000305}
   m_SizeDelta: {x: -1010, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2483940881476205648
@@ -1056,9 +1056,9 @@ RectTransform:
   m_Father: {fileID: 6022447980670828375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1, y: -108}
-  m_SizeDelta: {x: -14.849976, y: -215.53189}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -1, y: 167}
+  m_SizeDelta: {x: -14.849976, y: 334.4681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3780032195040900522
 GameObject:
@@ -1150,7 +1150,7 @@ GameObject:
   - component: {fileID: 8578542907977134970}
   - component: {fileID: 6581585535192239726}
   m_Layer: 5
-  m_Name: Button_ShowMonsterBook
+  m_Name: Button_MonsterCategory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,18 +1163,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4043652321032488270}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3190654221663005157}
-  m_Father: {fileID: 6824736600485830982}
+  m_Father: {fileID: 285016172686817201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -428, y: -209}
-  m_SizeDelta: {x: 260, y: 140}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 260, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6581585535192239726
 MonoBehaviour:
@@ -1379,9 +1379,7 @@ RectTransform:
   - {fileID: 8875971206985937226}
   - {fileID: 5805359978718743054}
   - {fileID: 5311386559481218126}
-  - {fileID: 5943385811028808234}
-  - {fileID: 8578542907977134970}
-  - {fileID: 4317265335476158457}
+  - {fileID: 285016172686817201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1405,6 +1403,9 @@ MonoBehaviour:
   Image_MainIcoin: {fileID: 6282542153449472973}
   Text_MainName: {fileID: 3878317095109107796}
   Text_Desc: {fileID: 4420878046966985612}
+  Btn_ItemCategory: {fileID: 9088338373901283134}
+  Btn_MonsterCategory: {fileID: 6581585535192239726}
+  Btn_HarvestCategory: {fileID: 1707259586517271277}
   Transform_SlotRoot: {fileID: 3602473102417560776}
   Btn_CloseSelf: {fileID: 5484286803930070205}
   Btn_CloseAll: {fileID: 2745567221467164086}
@@ -1724,6 +1725,71 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6605485013013764787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285016172686817201}
+  - component: {fileID: 7022330913611117492}
+  m_Layer: 5
+  m_Name: Layout_BookCategory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &285016172686817201
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605485013013764787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5943385811028808234}
+  - {fileID: 8578542907977134970}
+  - {fileID: 4317265335476158457}
+  m_Father: {fileID: 6824736600485830982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -373, y: -146}
+  m_SizeDelta: {x: -1010, y: 156.4459}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7022330913611117492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605485013013764787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &7167572758210450854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2074,7 @@ GameObject:
   - component: {fileID: 4317265335476158457}
   - component: {fileID: 1707259586517271277}
   m_Layer: 5
-  m_Name: Button_ShowSkillBook
+  m_Name: Button_HarvestCategory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2021,18 +2087,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8429308023248701901}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6962672484417496422}
-  m_Father: {fileID: 6824736600485830982}
+  m_Father: {fileID: 285016172686817201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -134, y: -209}
-  m_SizeDelta: {x: 260, y: 140}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 260, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1707259586517271277
 MonoBehaviour:
@@ -2084,7 +2150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 484.0244, y: -13.843262}
+  m_AnchoredPosition: {x: 484.0244, y: -13.844666}
   m_SizeDelta: {x: -1010, y: -80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8688083463866579241
@@ -2165,7 +2231,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD0AC"
+  m_Text: "\uCC44\uC9D1\uBB3C"
 --- !u!1001 &906187276514601169
 PrefabInstance:
   m_ObjectHideFlags: 0

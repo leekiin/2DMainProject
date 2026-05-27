@@ -6,20 +6,23 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 {
     [SerializeField] private GameObject Prefab_Slot;
     [SerializeField] private Transform Transform_UISlotRoot;
-    [SerializeField] private DaniTechUIButton Button_CreateSlot;
+    [SerializeField] private DaniTechUIButton Button_UseSelectItem;
     [SerializeField] private DaniTechUIButton Button_CloseSelf;
     [SerializeField] private DaniTechUIButton Button_CloseSelfAllArea;
 
-    private int _generatedKey = 0;
-    private Dictionary<int, DaniTech_SampleInventorySlotUI> _itemSlotList = new Dictionary<int, DaniTech_SampleInventorySlotUI>();
+    private Dictionary<long, DaniTech_SampleInventorySlotUI> _itemSlotList = new Dictionary<long, DaniTech_SampleInventorySlotUI>();
 
+    private long _currentSelectedItemUniqueId;
 
     private void OnEnable()
     {
-        Button_CreateSlot.BindOnClickButtonEvent(OnClick_CreateSlotTest);
+        Button_UseSelectItem.BindOnClickButtonEvent(OnClick_UseSelectItem, true);
         Button_CloseSelf.BindOnClickButtonEvent(OnClick_ClosePopup);
         Button_CloseSelfAllArea.BindOnClickButtonEvent(OnClick_ClosePopup);
         SetInventoryItemSlotOnEnable();
+
+        ActiveUseSelectItemButton(false);
+
     }
 
     private void SetInventoryItemSlotOnEnable()
@@ -43,7 +46,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
         foreach (var itemModel in itemList) 
         {
-            CreateSlot(itemModel.ItemDataId, itemModel.ItemStackCount);
+            CreateSlot(itemModel.ItemUniqueId, itemModel.ItemDataId, itemModel.ItemStackCount);
         }
     }
 
@@ -53,6 +56,8 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         // 소멸이니까 나중에 신경써주셔도 되요
         // _itemSlotList.Clear();
         // Destroy
+
+        Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
     }
 
     public void OnClick_ClosePopup()
@@ -60,13 +65,42 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
     }
 
-
-    public void OnClick_CreateSlotTest()
+    public void OnClick_UseSelectItem()
     {
-        // CreateSlot();
+        RequestSelectedUseItem();
     }
 
-    private void CreateSlot(string itemDataId, int itemStackCount)
+    private void RequestSelectedUseItem()
+    {
+        bool isItemRemoved = DaniTechGameManager.Inst.RequestUseItem(_currentSelectedItemUniqueId);  
+        if(isItemRemoved == true)
+        {
+            RemoveItemSlot(_currentSelectedItemUniqueId);
+            _currentSelectedItemUniqueId = 0;
+            ActiveUseSelectItemButton(false);
+        }
+    }
+
+    private void ActiveUseSelectItemButton(bool isActive)
+    {
+        Button_UseSelectItem.gameObject.SetActive(isActive);
+    }
+
+    private void RemoveItemSlot(long removedItemUniqueId)
+    {
+        if(_itemSlotList.ContainsKey(removedItemUniqueId) == false)
+        {
+            Debug.LogError("제거하려는 아이템 슬롯을 찾을 수 없음!");
+            return;
+        }
+
+        var slotComponent = _itemSlotList[removedItemUniqueId];
+        _itemSlotList.Remove(removedItemUniqueId);
+        Destroy(slotComponent.gameObject);
+    }
+
+
+    private void CreateSlot(long itemUniqueId, string itemDataId, int itemStackCount)
     {
         // 1-1 수동 SetParant가 뒤에 지금은 자동으로 해주고 있다
         var gObj = Instantiate(Prefab_Slot, Transform_UISlotRoot);
@@ -76,29 +110,32 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         var slotComponent = gObj.GetComponent<DaniTech_SampleInventorySlotUI>();
         if(slotComponent == null) return;
 
-        _generatedKey++;
-
         // 1-3 여기서 slotComponent가지고 뭔가를 하는 겁니다!
-        slotComponent.InitSlot(_generatedKey, itemDataId, itemStackCount);
-        slotComponent.gameObject.name = $"ItemSlot : {slotComponent.SlotInstanceId}";
+        slotComponent.InitSlot(itemUniqueId, itemDataId, itemStackCount);
+        slotComponent.gameObject.name = $"ItemSlot : {slotComponent.SlotItemUniqueId}";
 
         // 1-4 중복체크 해주면 좋긴 하지만, 일단 쉽게 컴포넌트(컴포넌트로 게임오브젝트는 받을 수 있으므로)를 보관해보자
-        _itemSlotList.Add(slotComponent.SlotInstanceId, slotComponent);
+        _itemSlotList.Add(slotComponent.SlotItemUniqueId, slotComponent);
 
         slotComponent.BindSlotSelectEvent(OnChildSlotSelected);
     }
 
 
-    private void OnChildSlotSelected(int selectedSlotInstanceId)
+    private void OnChildSlotSelected(long selectedItemUniqueId)
     {
         foreach(var slotKv in _itemSlotList)
         {
             var slot = slotKv.Value;
-            bool isSlotSelected = (selectedSlotInstanceId == slot.SlotInstanceId);
+            bool isSlotSelected = (selectedItemUniqueId == slot.SlotItemUniqueId);
             slot.ChangeSelectedState(isSlotSelected);
-        }
 
-        Debug.LogWarning($"자식 슬롯 {selectedSlotInstanceId} 선택됨!");
+            if (isSlotSelected == true)
+            {
+                _currentSelectedItemUniqueId = slot.SlotItemUniqueId;
+                ActiveUseSelectItemButton(slot.IsUsableItem);
+            }
+        }
+        Debug.LogWarning($"자식 슬롯 {selectedItemUniqueId} 선택됨!");
     }
 
 }

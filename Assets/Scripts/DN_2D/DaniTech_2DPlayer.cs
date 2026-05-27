@@ -322,11 +322,9 @@ public class DaniTech_2DPlayer : MonoBehaviour
         {
             _playerHp = 0;
             PlayerDie();
-            return;
         }
 
         InvokeStatChangedEvent();
-
     }
 
     public void PlayerDie()
@@ -367,5 +365,16 @@ public class DaniTech_2DPlayer : MonoBehaviour
         Vector2 adjustedDir = GetAdjustDirection(_lookDirection);
         Vector3 center = transform.position + new Vector3(adjustedDir.x * _lastOverlapOffset.x, adjustedDir.y * _lastOverlapOffset.y, 0); // 예시로 offsetPosition을 (1, 0)으로 설정
         Gizmos.DrawSphere(center, _lastOverlapRadius);
+    }
+
+    public void AddHp(int hp)
+    {
+        _playerHp += hp;
+        InvokeStatChangedEvent();
+    }
+
+    public void AddAtk(int atk)
+    {
+        _playerBaseAtk += atk;
     }
 }

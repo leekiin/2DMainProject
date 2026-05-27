@@ -330,7 +330,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     public void PlayerDie()
     {
         DaniTechUIManager.Instance.RemoveHudSlot(0);
-
+        DaniTechUIManager.Instance.OpenGameOverUI();
     }
 
     public void BindOnStatChangedEvent(Action<int, int> hpChangeCallback, Action<int, int> mpChangeCallback)

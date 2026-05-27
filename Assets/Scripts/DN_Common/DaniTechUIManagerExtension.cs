@@ -20,6 +20,7 @@ public enum DaniTechUIType
     DNDialogueUI,
     DNInfoBookUI,
     EndingUI,
+    GameOverUI,
     RobbyUI,
     GameBookUI,
     HudUI
@@ -125,6 +126,16 @@ public static class DaniTechUIManagerExtension
     {
         var uiBase = uiManager.OpenUI(DaniTechUIRootType.VeryFrontUI, DaniTechUIType.EndingUI);
         if( uiBase == null)
+        {
+            Debug.LogWarning($"UI가 생성되지 않았습니다.");
+            return;
+        }
+    }
+
+    public static void OpenGameOverUI(this DaniTechUIManager uiManager)
+    {
+        var uiBase = uiManager.OpenUI(DaniTechUIRootType.VeryFrontUI, DaniTechUIType.GameOverUI);
+        if (uiBase == null)
         {
             Debug.LogWarning($"UI가 생성되지 않았습니다.");
             return;

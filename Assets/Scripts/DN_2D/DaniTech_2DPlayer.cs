@@ -224,6 +224,10 @@ public class DaniTech_2DPlayer : MonoBehaviour
         return true;
     }
 
+    public int GetPlayerATK()
+    {
+        return _playerBaseAtk;
+    }
     public void UseNormalAttack()
     {
         if (CheckSkillUseable(isShowMsg:false) == false) return;

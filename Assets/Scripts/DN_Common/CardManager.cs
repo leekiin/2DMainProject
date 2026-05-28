@@ -86,13 +86,34 @@ public class CardManager : MonoBehaviour
 
     void ExecuteSkill(Vector3 targetPos)
     {
-        PlayerSkillCaster.Inst.CastProjectileSkill();
-        // 사용한 카드를 리스트에서 제거하고 파괴
-        handCards.Remove(aimingCard);
-        Destroy(aimingCard.gameObject);
+        // 1. 먼저 주인공 컴포넌트를 가져와 스킬을 발사시킵니다.
+        var localPlayer = DaniTechGameObjectManager.Inst.GetLocalPlayer();
+        if (localPlayer != null)
+        {
+            int actualDamage = localPlayer.GetPlayerATK(); // 람다 없이 구현한 프로퍼티/함수
+            string playerTag = localPlayer.gameObject.tag;
 
+            PlayerSkillCaster.Inst.CastProjectileSkill(actualDamage, playerTag);
+        }
+        else
+        {
+            PlayerSkillCaster.Inst.CastProjectileSkill(100, "Player");
+        }
+
+        // 2. 조준 중이던 카드를 리스트에서 먼저 제외합니다.
+        CardSlotUI cardToDestroy = aimingCard;
+        handCards.Remove(cardToDestroy);
         aimingCard = null;
+
+        // 3. 남은 카드들만 가지고 부채꼴 재정렬을 수행합니다. (이제 에러가 나지 않습니다!)
         AlignCards();
+
+        // 4. 안전하게 애니메이션을 완전히 끄고(Kill) 오브젝트를 파괴합니다.
+        if (cardToDestroy != null)
+        {
+            cardToDestroy.GetComponent<RectTransform>().DOKill();
+            Destroy(cardToDestroy.gameObject);
+        }
     }
 
     public void CancelAiming()

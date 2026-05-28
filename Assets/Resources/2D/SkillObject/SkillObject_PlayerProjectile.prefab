@@ -138,8 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a2fb58656853944a9548fd8f64b453d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProjectile
-  speed: 10
-  lifetime: 10
+  SpriteRenderer_Effect: {fileID: 5588356170741822682}
+  ProjecTileSpeed: 10
+  ProjecTileSecond: 10
 --- !u!50 &5037202333405444234
 Rigidbody2D:
   serializedVersion: 5

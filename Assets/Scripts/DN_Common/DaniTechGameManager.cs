@@ -99,8 +99,6 @@ public class DaniTechGameManager : MonoBehaviour
                 int statChangeVal = int.Parse(str);
                 var playerComponent = GetLocalPlayer();
                 playerComponent.AddAtk(statChangeVal);
-
-
             }
         }
         else if(itemUseType == "StatChangeHp")

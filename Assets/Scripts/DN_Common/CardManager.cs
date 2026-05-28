@@ -56,11 +56,7 @@ public class CardManager : MonoBehaviour
         aimingCard = card;
         aimingCard.HideCardForAiming(); // 카드는 잠시 숨김
 
-        // 조준 인디케이터 생성
-        if (rangeIndicator != null)
-        {
-            currentIndicator = Instantiate(rangeIndicator);
-        }
+        PlayerSkillCaster.Inst.StartIndicator();
     }
 
     // 조준 중 마우스 이동 및 클릭 감지
@@ -90,16 +86,12 @@ public class CardManager : MonoBehaviour
 
     void ExecuteSkill(Vector3 targetPos)
     {
-        aimingCard.UseSkill(targetPos);
-
+        PlayerSkillCaster.Inst.CastProjectileSkill();
         // 사용한 카드를 리스트에서 제거하고 파괴
         handCards.Remove(aimingCard);
         Destroy(aimingCard.gameObject);
 
         aimingCard = null;
-        if (currentIndicator != null) Destroy(currentIndicator);
-
-        // 남은 카드들 정렬 상태 재업데이트
         AlignCards();
     }
 
@@ -110,7 +102,7 @@ public class CardManager : MonoBehaviour
         aimingCard.ReturnToHand(); // 카드를 다시 부채꼴 위치로 돌려놓음
         aimingCard = null;
 
-        if (currentIndicator != null) Destroy(currentIndicator);
+        PlayerSkillCaster.Inst.ClearIndicator();
     }
 
     // 카드들을 부채꼴로 예쁘게 재정렬하는 함수 (카드가 사용되어 개수가 줄었을 때도 대응)

@@ -127,9 +127,7 @@ public class DaniTechGameManager : MonoBehaviour
                         var playerComponent = GetLocalPlayer();
                         DaniTechGameObjectManager.Inst.CreateMonsterObject(monsterDataId, playerComponent.transform).Forget();
                     }
-
                 }
-
             }
         }
     }

@@ -16,6 +16,11 @@ public class PlayerAttackTrigger : MonoBehaviour
 
     public void OnEnable()
     {
+        ClearHitList();
+    }
+
+    public void ClearHitList()
+    {
         _hitMonsterIdList.Clear();
     }
 

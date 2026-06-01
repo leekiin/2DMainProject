@@ -276,6 +276,12 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     IEnumerator CoStartNormalAttack()
     {
+        var attackTrigger = Collider_PlayerNormalAttack.GetComponent<PlayerAttackTrigger>();
+        if ((attackTrigger != null))
+        {
+            attackTrigger.ClearHitList();
+        }
+
         Collider_PlayerNormalAttack.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         Collider_PlayerNormalAttack.gameObject.SetActive(false);

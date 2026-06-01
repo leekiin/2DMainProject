@@ -23,7 +23,8 @@ public enum DaniTechUIType
     GameOverUI,
     RobbyUI,
     GameBookUI,
-    HudUI
+    HudUI,
+    CarrotChoicePopupUI
 }
 
 public static class DaniTechUIManagerExtension

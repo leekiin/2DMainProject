@@ -22,7 +22,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         SetInventoryItemSlotOnEnable();
 
         ActiveUseSelectItemButton(false);
-
     }
 
     private void SetInventoryItemSlotOnEnable()
@@ -53,11 +52,13 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void OnDisable()
     {
-        // 소멸이니까 나중에 신경써주셔도 되요
-        // _itemSlotList.Clear();
-        // Destroy
-
         Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
+    }
+
+    public void ClearInventory()
+    {
+        // 소멸이니까 나중에 신경써주셔도 되요
+        _itemSlotList.Clear();
     }
 
     public void OnClick_ClosePopup()
@@ -90,7 +91,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
     {
         if(_itemSlotList.ContainsKey(removedItemUniqueId) == false)
         {
-            Debug.LogError("제거하려는 아이템 슬롯을 찾을 수 없음!");
+            //Debug.LogError("제거하려는 아이템 슬롯을 찾을 수 없음!");
             return;
         }
 
@@ -120,7 +121,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         slotComponent.BindSlotSelectEvent(OnChildSlotSelected);
     }
 
-
     private void OnChildSlotSelected(long selectedItemUniqueId)
     {
         foreach(var slotKv in _itemSlotList)
@@ -135,7 +135,5 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
                 ActiveUseSelectItemButton(slot.IsUsableItem);
             }
         }
-        Debug.LogWarning($"자식 슬롯 {selectedItemUniqueId} 선택됨!");
     }
-
 }

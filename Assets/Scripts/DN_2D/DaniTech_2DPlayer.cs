@@ -234,8 +234,10 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _carrotUI.AddCarrotScore(_currentCarrot);
         if (_currentCarrot >= 5)
         {
+            DaniTechGameManager.Inst.RequestClearItemList();
             DaniTechUIManager.Instance.OpenEndingUI();
             _currentCarrot = 0;
+            
         }
     }
 
@@ -365,6 +367,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     public void PlayerDie()
     {
         DaniTechUIManager.Instance.RemoveHudSlot(0);
+        DaniTechGameManager.Inst.RequestClearItemList();
         DaniTechUIManager.Instance.OpenGameOverUI();
     }
 

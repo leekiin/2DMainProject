@@ -132,6 +132,12 @@ public class DaniTechGameManager : MonoBehaviour
         }
     }
 
+    public void RequestClearItemList()
+    {
+        _playerModel.ItemList.Clear();
+        SaveData();
+    }
+
     private bool RequestRemoveItem(bool isRemoveItemExist, int removeRatgetIdx)
     {
         

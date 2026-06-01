@@ -81,7 +81,7 @@ public class SkillProjectile : SkillBase
             //monsterComponent.TakeDamage(_damage);
 
             int instId = monsterComponent.GetMonsterInstanceId();
-            _onSkillColision?.Invoke(instId, _damage);
+            _onSkillColision?.Invoke(instId, _damage*10);
 
             Destroy(this.gameObject);
         }

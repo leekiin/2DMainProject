@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
@@ -19,7 +20,6 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [SerializeField] private DaniTech_2DAnimatorController AnimatorController_Entity;
 
     [Header("스킬")]
-    [SerializeField] private Collider2D Collider_PlayerNormalAttack;
     [SerializeField] private GameObject Prefab_SkillProjectile;
     [SerializeField] private Transform Transform_SkillProjectileRoot;
 
@@ -28,11 +28,13 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [Header("전투 관련 정보")]
     [SerializeField] private int _maxHp = 1000;
     [SerializeField] private int _playerHp = 1000;
-    [SerializeField] private int _playerBaseAtk = 100;
+    [SerializeField] private int _playerBaseAtk = 30;
 
     [Header("점수UI")]
     [SerializeField] private CarrotScoreUI _carrotUI;
 
+    [Header("일반 공격 콜리더")]
+    [SerializeField] private Collider2D Collider_PlayerNormalAttack;
 
     private Rigidbody2D _rigidBody;
     private bool _isGrounded;
@@ -40,6 +42,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private bool _lookRight = true;
     private bool _isSkillUsing = false;
     private string _characterName = "보팔레빗";
+
+    private List<int> _hitMonsterIdList = new List<int>();
 
     //private int _currentScore;
     private int _currentCarrot;
@@ -57,7 +61,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private event Action<int, int> _onMpChanged;
 
 
-    void Awake()
+    private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
 
@@ -74,7 +78,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
         DaniTechUIManager.Instance.AddHudSlot(0, this.gameObject.transform, _characterName);
     }
 
-    void Update()
+    private void Update()
     {
         // 1. 입력 받기 (Update에서 수행)
         _horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -144,7 +148,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    
+
+    public void ClearHitList()
+    {
+        _hitMonsterIdList.Clear();
+    }
 
     // 6) 적 충돌 시 처리를 해보자
     private void OnCollisionEnter2D(Collision2D collision)
@@ -183,18 +191,38 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (trigger.gameObject.CompareTag("Carrot") == false)
+        if (trigger.gameObject.CompareTag("Carrot"))
         {
+            var carrotComponent = trigger.gameObject.GetComponent<DaniTech_2DFieldObject>();
+            if (carrotComponent == null)
+            {
+                Debug.LogError($"충돌한 Carrot 오브젝트가 Null입니다.");
+                return;
+            }
+            AddCarrotScore();
             return;
         }
 
-        var carrotComponent = trigger.gameObject.GetComponent<DaniTech_2DFieldObject>();
-        if (carrotComponent == null)
+        if (Collider_PlayerNormalAttack.gameObject.activeInHierarchy && trigger.CompareTag("Enemy"))
         {
-            Debug.Log($"충돌한 객체에서 컴포넌트를 찾을 수 없습니다 : {gameObject.name}");
-            return;
+            GameMonster monster = trigger.GetComponent<GameMonster>();
+            if (monster != null)
+            {
+                int monsterId = monster.GetMonsterInstanceId();
+
+                if (_hitMonsterIdList.Contains(monsterId)) return;
+
+                _hitMonsterIdList.Add(monsterId);
+
+                int damage = _playerBaseAtk;
+                var monsterTarget = DaniTechGameObjectManager.Inst.GetMonsterObjectByInstanceId(monsterId);
+                if (monsterTarget != null)
+                {
+                    Debug.Log($"일반 공격 적중. {damage}의 피해를 가함");
+                    monsterTarget.TakeDamage(damage);
+                }
+            }
         }
-        AddCarrotScore();
     }
 
     private void AddCarrotScore()
@@ -276,15 +304,12 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     IEnumerator CoStartNormalAttack()
     {
-        var attackTrigger = Collider_PlayerNormalAttack.GetComponent<PlayerAttackTrigger>();
-        if ((attackTrigger != null))
-        {
-            attackTrigger.ClearHitList();
-        }
+        ClearHitList();
 
         Collider_PlayerNormalAttack.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.7f);
         Collider_PlayerNormalAttack.gameObject.SetActive(false);
+
         _isSkillUsing = false;
     }
 
@@ -360,7 +385,6 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _onHpChanged?.Invoke(_playerHp, _maxHp);
         //_onMpChanged?.Invoke(_playerMp);
     }
-
 
     // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
     private void OnDrawGizmos()

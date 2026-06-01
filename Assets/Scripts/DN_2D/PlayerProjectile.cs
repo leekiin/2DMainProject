@@ -32,7 +32,6 @@ public class PlayerProjectile : SkillBase
         float angle = Mathf.Atan2(_moveDirection.y, _moveDirection.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // 💡 기존의 flipX, flipY는 완전히 회전시키는 방식으로 대체되므로 제거하거나 초기화합니다.
         SpriteRenderer_Effect.flipX = false;
         SpriteRenderer_Effect.flipY = false;
 
@@ -78,7 +77,7 @@ public class PlayerProjectile : SkillBase
             if (monsterComponent == null) return;
 
             int instId = monsterComponent.GetMonsterInstanceId();
-            _onSkillColision?.Invoke(instId, _damage);
+            _onSkillColision?.Invoke(instId, _damage*3);
 
             Destroy(this.gameObject);
         }

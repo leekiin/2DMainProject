@@ -55,12 +55,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
     }
 
-    public void ClearInventory()
-    {
-        // 소멸이니까 나중에 신경써주셔도 되요
-        _itemSlotList.Clear();
-    }
-
+    
     public void OnClick_ClosePopup()
     {
         DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);

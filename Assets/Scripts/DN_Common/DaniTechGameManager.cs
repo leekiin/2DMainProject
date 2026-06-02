@@ -66,21 +66,44 @@ public class DaniTechGameManager : MonoBehaviour
                 isRemoveItemExist = true;
 
                 string itemDataId = itemModel.ItemDataId;
+                string itemType = itemModel.ItemType;
                 var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
 
-                if(string.IsNullOrEmpty(itemData.UseItemType) == false)
+                if(itemData.UseItemType != null && itemData.UseItemType.Count > 0)
                 {
-                    UseItemFunction(itemData.UseItemType, itemData.UseItemParameterList);
+                    if (itemData.ItemType == "Carrot")
+                    {
+                        DaniTechUIManager.Instance.OpenUI(DaniTechUIRootType.PopupUI, DaniTechUIType.CarrotChoicePopupUI);
+                        break;
+                    }
+                    UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList); 
                 }
-
                 break;
             }
-
             removeRatgetIdx++;
         }
 
         RequestRemoveItem(isRemoveItemExist, removeRatgetIdx);
         return true;
+    }
+
+    //일단은 하드코딩으로 돌아가게 만들고 개선은 나중에. 이 굴욕은 반드시 갚겠다.
+    public void UseCarrotItemFunction(string itemUseType, int useItemParam)
+    {
+        if(itemUseType == "StatChangeHp")
+        {
+            var playerComponent = GetLocalPlayer();
+            playerComponent.AddHp(useItemParam);
+        }
+        else if(itemUseType == "StatChangeAtk")
+        {
+            var playerComponent = GetLocalPlayer();
+            playerComponent.AddAtk(useItemParam);
+        }
+        else if(itemUseType == "AddSkillCard")
+        {
+            //스킬 카드 추가 로직
+        }
     }
 
     private void UseItemFunction(string itemUseType, List<string> useItemParamList)

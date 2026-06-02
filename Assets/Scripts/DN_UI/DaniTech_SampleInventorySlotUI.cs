@@ -40,7 +40,7 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
             return;
         }
 
-        IsUsableItem = string.IsNullOrEmpty(itemData.UseItemType) == false; 
+        IsUsableItem = (itemData.UseItemType != null && itemData.UseItemType.Count > 0);
 
         // + Addressable을 적용하면서 비동기로 바뀌었다
         //DaniTechResourceManager.Inst.LoadSprite(iconPath, (sprite) => {

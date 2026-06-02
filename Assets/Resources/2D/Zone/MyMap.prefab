@@ -773,10 +773,11 @@ Transform:
   - {fileID: 7484295333928723610}
   - {fileID: 4860810983054003545}
   - {fileID: 7441121515490777872}
-  - {fileID: 4604246907966754800}
   - {fileID: 2799923922472968495}
   - {fileID: 4879051599702133523}
   - {fileID: 4681520030069227342}
+  - {fileID: 4604246907966754800}
+  - {fileID: 7378924318193050547}
   - {fileID: 2535760020302311270}
   - {fileID: 2818797187913353824}
   m_Father: {fileID: 0}
@@ -1003,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_Name
-      value: SpawnSpot_Monster
+      value: SpawnSpot_Monster_Bear_1_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1069,7 +1070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_Name
-      value: SpawnSpot_Monster (1)
+      value: SpawnSpot_Monster_Slime_1_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1267,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_Name
-      value: SpawnSpot_Monster (2)
+      value: SpawnSpot_Monster_Slime_1_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1333,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
       propertyPath: m_Name
-      value: SpawnSpot_Monster (3)
+      value: SpawnSpot_Monster_Slime_1_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1344,4 +1345,70 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
   m_PrefabInstance: {fileID: 6825385942692270741}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8658039861071810152
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3297216931638360069}
+    m_Modifications:
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180363546269119021, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: _spawnObjectDataId
+      value: mob_bear_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842466901107213727, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+      propertyPath: m_Name
+      value: SpawnSpot_Monster_Bear_1_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+--- !u!4 &7378924318193050547 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2179951074649632219, guid: 3048195ec71e71249a72e8d667ed202b, type: 3}
+  m_PrefabInstance: {fileID: 8658039861071810152}
   m_PrefabAsset: {fileID: 0}

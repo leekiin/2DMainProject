@@ -9,6 +9,8 @@ public class DaniTechItemModel
     public long ItemUniqueId;
     public string ItemDataId;
     public int ItemStackCount;
+    public string ItemType;
+
 }
 
 // 1) 플레이어 데이터를 만들어보자

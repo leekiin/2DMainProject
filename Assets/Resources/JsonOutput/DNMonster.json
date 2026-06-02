@@ -40,7 +40,7 @@
     "Description": "쮸쀼쮸쀼",
     "BaseHp": 1000,
     "BaseAtk": 100,
-    "NormalAtkMultiple": 100,
+    "NormalAtkMultiple": 2,
     "SkillAtkMultipleList": [
       1.5,
       5
@@ -50,8 +50,8 @@
   },
   {
     "Id": "mob_bat_1",
-    "Name": null,
-    "Description": null,
+    "Name": "박쥐",
+    "Description": "거대한 박쥐. ",
     "BaseHp": null,
     "BaseAtk": null,
     "NormalAtkMultiple": null,
@@ -61,11 +61,11 @@
   },
   {
     "Id": "mob_helldog_1",
-    "Name": null,
-    "Description": null,
-    "BaseHp": null,
-    "BaseAtk": null,
-    "NormalAtkMultiple": null,
+    "Name": "지옥견",
+    "Description": "지옥에서 올라온 개. 강하다.",
+    "BaseHp": 2000,
+    "BaseAtk": 200,
+    "NormalAtkMultiple": 3,
     "SkillAtkMultipleList": null,
     "IconPath": null,
     "PrefabPath": null

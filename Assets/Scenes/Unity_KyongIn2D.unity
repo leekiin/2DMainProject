@@ -726,6 +726,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2883145900286861140, guid: 57dc8196ffe85a44e82dcff2c0da185d, type: 3}
+      propertyPath: _carrotGoal
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5635958633115884484, guid: 57dc8196ffe85a44e82dcff2c0da185d, type: 3}
       propertyPath: m_Name
       value: CarrotScoreUI
@@ -1427,7 +1431,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 276, y: -295}
-  m_SizeDelta: {x: 250, y: 300}
+  m_SizeDelta: {x: 200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1106568562
 GameObject:
@@ -1477,10 +1481,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1337354877}
   - component: {fileID: 1337354878}
-  - component: {fileID: 1337354879}
   m_Layer: 0
   m_Name: Pos_NormalAttack
-  m_TagString: SkillObject
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1536,18 +1539,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.2467585
---- !u!114 &1337354879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337354876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee6f3a8e1526c1479d9ae7f558c197c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackTrigger
 --- !u!1 &1384665394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 697, y: 136}
+  m_AnchoredPosition: {x: 760, y: 136}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1775303399 stripped
@@ -2333,7 +2324,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 276, y: -295}
-  m_SizeDelta: {x: 250, y: 300}
+  m_SizeDelta: {x: 200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1931742615
 CanvasGroup:
@@ -2780,13 +2771,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   AnimatorController_Entity: {fileID: 7372086092907692621}
-  Collider_PlayerNormalAttack: {fileID: 1337354878}
   Prefab_SkillProjectile: {fileID: 6367772490329889367, guid: f8ff94b53cc674a43928f61c102b72cb, type: 3}
   Transform_SkillProjectileRoot: {fileID: 1775303399}
   _maxHp: 1000
   _playerHp: 1000
-  _playerBaseAtk: 100
+  _playerBaseAtk: 30
   _carrotUI: {fileID: 857427696}
+  Collider_PlayerNormalAttack: {fileID: 1337354878}
   _currentView: 0
   _lookDirection: {x: 1, y: 0}
 --- !u!224 &258818971338818057
@@ -2866,7 +2857,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 276, y: -295}
-  m_SizeDelta: {x: 250, y: 300}
+  m_SizeDelta: {x: 200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!20 &1778569542870056891
 Camera:
@@ -3164,7 +3155,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &4762437904385658651

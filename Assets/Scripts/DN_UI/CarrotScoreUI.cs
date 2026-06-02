@@ -5,9 +5,9 @@ public class CarrotScoreUI : MonoBehaviour
 {
     [SerializeField] private Text Text_CurrentScore;
 
-    public int _carrotGoal = 5;
+    public int _carrotGoal = 10;
 
-    public void AddCarrotScore(int currentCarrot)
+    public void SetCarrotScore(int currentCarrot)
     {
         Text_CurrentScore.text = $"얻은 당근 수 : {currentCarrot} / {_carrotGoal}";
     }

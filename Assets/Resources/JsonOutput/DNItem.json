@@ -8,7 +8,9 @@
     "MaxStackCount": 20,
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Box_1",
-    "UseItemType": "RandomItemBox",
+    "UseItemType": [
+      "RandomItemBox"
+    ],
     "UseItemParameterList": [
       "Item_Equip_Hat_1",
       "Item_Corn_1",
@@ -36,7 +38,9 @@
     "MaxStackCount": 0,
     "SellingPrice": 1,
     "IconPath": "Icon/Icon_Item_Equip_Hat_1",
-    "UseItemType": "StatChangeAtk",
+    "UseItemType": [
+      "StatChangeAtk"
+    ],
     "UseItemParameterList": [
       "700"
     ]
@@ -50,7 +54,9 @@
     "MaxStackCount": 100,
     "SellingPrice": 20,
     "IconPath": "Icon/Icon_Item_Corn",
-    "UseItemType": "StatChangeHp",
+    "UseItemType": [
+      "StatChangeHp"
+    ],
     "UseItemParameterList": [
       "20"
     ]
@@ -64,23 +70,31 @@
     "MaxStackCount": 20,
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Box_1",
-    "UseItemType": "SummonMonster",
+    "UseItemType": [
+      "StatChangeAtk"
+    ],
     "UseItemParameterList": [
-      "mob_bear_1"
+      "20"
     ]
   },
   {
     "Id": "Item_Carrot_1",
     "Name": "당근",
     "Description": "당근. 먹으면 기분이 좋아진다.",
-    "ItemType": "Normal",
+    "ItemType": "Carrot",
     "Grade": "Normal",
     "MaxStackCount": 20,
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Carrot",
-    "UseItemType": "StatChangeHp",
+    "UseItemType": [
+      "StatChangeHp",
+      "StatChangeAtk",
+      "AddSkillCard"
+    ],
     "UseItemParameterList": [
-      "250"
+      "70",
+      "20",
+      "1"
     ]
   }
 ]

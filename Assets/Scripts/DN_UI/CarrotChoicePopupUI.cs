@@ -22,17 +22,22 @@ public class CarrotChoicePopupUI : DaniTechUIBase
 
     public void OnClick_SelectHp()
     {
-        Debug.LogWarning("체력 선택");
+        Debug.Log("체력 선택");
+        DaniTechGameManager.Inst.UseCarrotItemFunction("StatChangeHp", 70);
+        DaniTechUIManager.Instance.ClosePopupUI(DaniTechUIType.CarrotChoicePopupUI);
     }
 
     public void OnClick_SelectAtk()
     {
-        Debug.LogWarning("공격력 선택");
+        Debug.Log("공격력 선택");
+        DaniTechGameManager.Inst.UseCarrotItemFunction("StatChangeAtk", 20);
+        DaniTechUIManager.Instance.ClosePopupUI(DaniTechUIType.CarrotChoicePopupUI);
     }
 
     public void OnClick_SelectSkillCard()
     {
-        Debug.LogWarning("스킬 카드 선택");
+        Debug.Log("스킬 카드 선택");
+        DaniTechUIManager.Instance.ClosePopupUI(DaniTechUIType.CarrotChoicePopupUI);
     }
 
 

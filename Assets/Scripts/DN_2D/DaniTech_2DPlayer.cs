@@ -231,8 +231,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
         // 알고 있는게 좋은걸까?
 
         _currentCarrot++;
-        _carrotUI.AddCarrotScore(_currentCarrot);
-        if (_currentCarrot >= 5)
+        _carrotUI.SetCarrotScore(_currentCarrot);
+        if (_currentCarrot >= _carrotUI._carrotGoal)
         {
             DaniTechGameManager.Inst.RequestClearItemList();
             DaniTechUIManager.Instance.OpenEndingUI();

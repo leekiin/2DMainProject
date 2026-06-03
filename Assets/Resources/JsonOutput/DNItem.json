@@ -48,28 +48,12 @@
   {
     "Id": "Item_Corn_1",
     "Name": "옥수수",
-    "Description": "옥수수다",
+    "Description": "먹으면 힘이 솟아나는 옥수수. \n공격력 + 20",
     "ItemType": "Normal",
     "Grade": "Normal",
     "MaxStackCount": 100,
     "SellingPrice": 20,
-    "IconPath": "Icon/Icon_Item_Corn",
-    "UseItemType": [
-      "StatChangeHp"
-    ],
-    "UseItemParameterList": [
-      "20"
-    ]
-  },
-  {
-    "Id": "Item_Potato_1",
-    "Name": "감자",
-    "Description": "감자다. 딱히 의미가 있진 않다.",
-    "ItemType": "Normal",
-    "Grade": "Normal",
-    "MaxStackCount": 20,
-    "SellingPrice": 100,
-    "IconPath": "Icon/Icon_Item_Box_1",
+    "IconPath": "Icon/Icon_Items[Icon_Corn]",
     "UseItemType": [
       "StatChangeAtk"
     ],
@@ -78,14 +62,30 @@
     ]
   },
   {
+    "Id": "Item_Potato_1",
+    "Name": "감자",
+    "Description": "맛있는 감자.\nHP + 30",
+    "ItemType": "Normal",
+    "Grade": "Normal",
+    "MaxStackCount": 20,
+    "SellingPrice": 100,
+    "IconPath": "Icon/Icon_Items[Icon_Potato]",
+    "UseItemType": [
+      "StatChangeHp"
+    ],
+    "UseItemParameterList": [
+      "30"
+    ]
+  },
+  {
     "Id": "Item_Carrot_1",
     "Name": "당근",
-    "Description": "당근. 먹으면 기분이 좋아진다.",
+    "Description": "엄청난 힘을 제공하는 신비한 당근.\nHP + 70 / 공격력 + 30/ 스킬카드 획득 중 1개를 선택할 수 있다.",
     "ItemType": "Carrot",
     "Grade": "Normal",
     "MaxStackCount": 20,
     "SellingPrice": 100,
-    "IconPath": "Icon/Icon_Item_Carrot",
+    "IconPath": "Icon/Icon_Item_Carrot[Carrot_1]",
     "UseItemType": [
       "StatChangeHp",
       "StatChangeAtk",
@@ -93,7 +93,7 @@
     ],
     "UseItemParameterList": [
       "70",
-      "20",
+      "30",
       "1"
     ]
   }

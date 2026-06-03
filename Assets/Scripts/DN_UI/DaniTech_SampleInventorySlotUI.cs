@@ -16,6 +16,7 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
     private event Action<long> OnSelectEvent;
 
     public long SlotItemUniqueId { get; private set; }
+    public string ItemDataId { get; private set; }
     public bool IsUsableItem { get; private set; }
 
     private void OnEnable()
@@ -68,6 +69,7 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
     public void InitSlot(long slotUniqueId, string itemDataId, int itemStackCount)
     {
         SlotItemUniqueId = slotUniqueId;
+        ItemDataId = itemDataId;
         SetIcon(itemDataId, itemStackCount);
         // Text_StackCount.text = slotInstanceId.ToString();
     }
@@ -76,7 +78,6 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
     {
         // 부모한테 알려주자
         OnSelectEvent?.Invoke(SlotItemUniqueId);
-
 
         Debug.Log($"{SlotItemUniqueId}눌러졌다");
         // 나중에 툴팁, 팝업 다 여기서 띄워주면 된다

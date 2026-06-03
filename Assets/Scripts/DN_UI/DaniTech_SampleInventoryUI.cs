@@ -16,7 +16,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void OnEnable()
     {
-        Button_UseSelectItem.BindOnClickButtonEvent(OnClick_UseSelectItem, true);
+        //Button_UseSelectItem.BindOnClickButtonEvent(OnClick_UseSelectItem, true);
         Button_CloseSelf.BindOnClickButtonEvent(OnClick_ClosePopup);
         Button_CloseSelfAllArea.BindOnClickButtonEvent(OnClick_ClosePopup);
         SetInventoryItemSlotOnEnable();
@@ -52,7 +52,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void OnDisable()
     {
-        Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
+        //Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
     }
 
     
@@ -79,7 +79,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void ActiveUseSelectItemButton(bool isActive)
     {
-        Button_UseSelectItem.gameObject.SetActive(isActive);
+        //Button_UseSelectItem.gameObject.SetActive(isActive);
     }
 
     private void RemoveItemSlot(long removedItemUniqueId)
@@ -129,6 +129,41 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
                 _currentSelectedItemUniqueId = slot.SlotItemUniqueId;
                 ActiveUseSelectItemButton(slot.IsUsableItem);
             }
+
+            OpenItemUsePopup(slot);
         }
+    }
+
+    private void OpenItemUsePopup(DaniTech_SampleInventorySlotUI selectedSlot)
+    {
+        // 1. 데이터 매니저에서 상세 아이템 정보 가져오기
+        var itemData = DaniTechGameDataManager.Instance.GetDNItemData(selectedSlot.ItemDataId);
+        if (itemData == null) return;
+
+        // 2. UI 매니저를 통해 팝업 컴포넌트 받아오기 
+        // (DaniTechUIManager.Instance.OpenUI가 제네릭 형태 <T>를 지원한다고 가정하거나, GetComponent를 해야합니다)
+        var popup = DaniTechUIManager.Instance.OpenUI(DaniTechUIRootType.PopupUI, DaniTechUIType.ItemUsePopupUI) as ItemUsePopupUI;
+
+        if (popup != null)
+        {
+            // 3. 팝업 컴포넌트의 초기화 함수들을 호출하며 정보 전달!
+            // (itemData 내부의 변수명은 기획 데이터 구조인 Name, Desc 등에 맞게 수정해 주세요)
+            popup.InitItemUsePopupUI(selectedSlot.SlotItemUniqueId, itemData.Name, itemData.Description);
+            popup.SetIcon(selectedSlot.ItemDataId);
+        }
+    }
+
+    // 인벤토리 UI 클래스 내부에 아래 public 메서드를 추가해 주세요.
+    public void HandleItemRemoved(long removedItemUniqueId)
+    {
+        // 1. 선택되어 있던 ID와 제거된 ID가 같다면 선택 상태 초기화
+        if (_currentSelectedItemUniqueId == removedItemUniqueId)
+        {
+            _currentSelectedItemUniqueId = 0;
+            ActiveUseSelectItemButton(false);
+        }
+
+        // 2. 이미 가지고 계신 슬롯 삭제 함수 호출 (화면에서 제거)
+        RemoveItemSlot(removedItemUniqueId);
     }
 }

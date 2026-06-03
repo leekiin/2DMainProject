@@ -90,6 +90,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d62ed142e1027a408a84ec35fdab562
+    m_Address: Icon/Icon_Items
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 88ee91520cc940b43b9a27aea138b08e
     m_Address: 2DObject/MonsterSlime
     m_ReadOnly: 0

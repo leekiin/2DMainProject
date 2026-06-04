@@ -35,14 +35,23 @@ public class ItemUsePopupUI : DaniTechUIBase
 
     public void OnClick_CloseItemUsePopupUI()
     {
+        var inventoryUI = DaniTechUIManager.Instance.GetOpenedUI(DaniTechUIRootType.ContentUI, DaniTechUIType.DNInventory) as DaniTech_SampleInventoryUI;
+        if (inventoryUI == null) return;
+
+        var currentSlotUI = inventoryUI.GetCurrentSlotUI();
+        
         DaniTechUIManager.Instance.CloseUI(DaniTechUIRootType.PopupUI, DaniTechUIType.ItemUsePopupUI);
+
+        if (currentSlotUI != null) 
+        {
+            currentSlotUI.ChangeSelectedState(false);
+        }
     }
 
     public void OnClick_UseItem()
     {
         Debug.Log($"팝업에서 아이템 사용 요청 : {SlotItemUniqueId}");
 
-        // ★ 인벤토리 UI에서 사용하던 로직과 동일하게 데이터 매니저/게임 매니저에 요청을 보냅니다.
         bool isItemRemoved = DaniTechGameManager.Inst.RequestUseItem(SlotItemUniqueId);
         if (isItemRemoved == true)
         {
@@ -54,14 +63,13 @@ public class ItemUsePopupUI : DaniTechUIBase
                 inventoryUI.HandleItemRemoved(SlotItemUniqueId);
             }
 
-            // 사용 완료 후 팝업 닫기
             OnClick_CloseItemUsePopupUI();
         }
     }
 
     public void InitItemUsePopupUI(long itemId, string itemName, string itemDesc)
     {
-        SlotItemUniqueId = itemId; // ★ 고유 ID 저장
+        SlotItemUniqueId = itemId; 
         Text_ItemName.text = itemName;
         Text_ItemDesc.text = itemDesc;
     }
@@ -80,6 +88,4 @@ public class ItemUsePopupUI : DaniTechUIBase
         DaniTechGameUtil.LoadAndSetSpriteImage(Image_ItemIcon, iconPath).Forget();
         Btn_UseItem.gameObject.SetActive(IsUsableItem);
     }
-
-
 }

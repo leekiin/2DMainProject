@@ -66,6 +66,15 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         RequestSelectedUseItem();
     }
 
+    public DaniTech_SampleInventorySlotUI GetCurrentSlotUI()
+    {
+        if(_itemSlotList.ContainsKey(_currentSelectedItemUniqueId) == false)
+        {
+            return null;
+        }
+        return _itemSlotList[_currentSelectedItemUniqueId];
+    }
+
     private void RequestSelectedUseItem()
     {
         bool isItemRemoved = DaniTechGameManager.Inst.RequestUseItem(_currentSelectedItemUniqueId);  
@@ -91,6 +100,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         }
 
         var slotComponent = _itemSlotList[removedItemUniqueId];
+        slotComponent.ChangeSelectedState(false);
         _itemSlotList.Remove(removedItemUniqueId);
         Destroy(slotComponent.gameObject);
     }
@@ -128,9 +138,8 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             {
                 _currentSelectedItemUniqueId = slot.SlotItemUniqueId;
                 ActiveUseSelectItemButton(slot.IsUsableItem);
+                OpenItemUsePopup(slot);
             }
-
-            OpenItemUsePopup(slot);
         }
     }
 
@@ -150,10 +159,10 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             // (itemData 내부의 변수명은 기획 데이터 구조인 Name, Desc 등에 맞게 수정해 주세요)
             popup.InitItemUsePopupUI(selectedSlot.SlotItemUniqueId, itemData.Name, itemData.Description);
             popup.SetIcon(selectedSlot.ItemDataId);
+            Debug.Log($"아이템 사용 팝업 열기! 아이템 이름 : {itemData.Name}, 설명 : {itemData.Description}");
         }
     }
 
-    // 인벤토리 UI 클래스 내부에 아래 public 메서드를 추가해 주세요.
     public void HandleItemRemoved(long removedItemUniqueId)
     {
         // 1. 선택되어 있던 ID와 제거된 ID가 같다면 선택 상태 초기화

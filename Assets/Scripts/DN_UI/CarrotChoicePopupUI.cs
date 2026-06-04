@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class CarrotChoicePopupUI : DaniTechUIBase
 {
@@ -18,6 +20,14 @@ public class CarrotChoicePopupUI : DaniTechUIBase
         Btn_SelectHp.UnBindOnClickButtonEvent(OnClick_SelectHp);
         Btn_SelectAtk.UnBindOnClickButtonEvent(OnClick_SelectAtk);
         Btn_SelectSkillCard.UnBindOnClickButtonEvent(OnClick_SelectSkillCard);
+    }
+
+    public void InitCarrotChoicePopup(List<string> selectableBuffIdList)
+    {
+        foreach(string buffId in selectableBuffIdList)
+        {
+
+        }
     }
 
     public void OnClick_SelectHp()

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class GameMonster : MonsterBase
 {
     [Header("몬스터 프리팹에서 미리 세팅할 데이터")]
-    public float SkillCoolTime = 5.0f;
+    public float SkillCoolTime = 6.0f;
     public GameObject Prefab_MonsterSkillObject;
     [SerializeField] private SpriteRenderer SpriteRenderer_Monster;
 

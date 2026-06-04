@@ -49,7 +49,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         }
     }
 
-
     private void OnDisable()
     {
         //Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);

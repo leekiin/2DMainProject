@@ -1,12 +1,18 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarrotChoicePopupUI : DaniTechUIBase
 {
     [SerializeField] private DaniTechUIButton Btn_SelectHp;
     [SerializeField] private DaniTechUIButton Btn_SelectAtk;
     [SerializeField] private DaniTechUIButton Btn_SelectSkillCard;
+
+    [SerializeField] private Text HpString;
+    [SerializeField] private Text AtkString;
+    [SerializeField] private Text SkillCardString;
 
     private void OnEnable()
     {
@@ -22,12 +28,11 @@ public class CarrotChoicePopupUI : DaniTechUIBase
         Btn_SelectSkillCard.UnBindOnClickButtonEvent(OnClick_SelectSkillCard);
     }
 
-    public void InitCarrotChoicePopup(List<string> selectableBuffIdList)
+    public void InitCarrotChoicePopup(/*List<string> selectableBuffIdList*/)
     {
-        foreach(string buffId in selectableBuffIdList)
+        /*foreach(string buffId in selectableBuffIdList)
         {
-
-        }
+        }*/
     }
 
     public void OnClick_SelectHp()

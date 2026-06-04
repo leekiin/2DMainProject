@@ -36,12 +36,13 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [Header("일반 공격 콜리더")]
     [SerializeField] private Collider2D Collider_PlayerNormalAttack;
 
+    public int _carrotUsedCount = 0;
     private Rigidbody2D _rigidBody;
     private bool _isGrounded;
     private float _horizontalInput;
     private bool _lookRight = true;
     private bool _isSkillUsing = false;
-    private string _characterName = "보팔레빗";
+    private string _characterName = "묘토";
 
     private List<int> _hitMonsterIdList = new List<int>();
 
@@ -237,7 +238,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
             DaniTechGameManager.Inst.RequestClearItemList();
             DaniTechUIManager.Instance.OpenEndingUI();
             _currentCarrot = 0;
-            
+            _carrotUsedCount = 1;
         }
     }
 

@@ -14,8 +14,6 @@ public class ItemUsePopupUI : DaniTechUIBase
     [SerializeField] private DaniTechUIButton Btn_CloseAll;
     [SerializeField] private DaniTechUIButton Btn_UseItem;
 
-    private event Action<long> OnSelectEvent;
-
     public long SlotItemUniqueId { get; private set; } // 인벤토리 슬롯의 UniqueId를 보관할 변수
     public bool IsUsableItem { get; private set; }
 

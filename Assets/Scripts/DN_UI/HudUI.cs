@@ -6,7 +6,7 @@ using UnityEngine;
 public class HudUI : DaniTechUIBase
 {
     [SerializeField] private GameObject Prefab_HudSlot;
-    [SerializeField] private GameObject Prefab_InteractionSlot;
+    //[SerializeField] private GameObject Prefab_InteractionSlot;
 
     [SerializeField] private Transform Transform_SlotRoot;
 
@@ -35,27 +35,27 @@ public class HudUI : DaniTechUIBase
     }
 
 
-    public void AddInteractiondSlot(int instanceId, Transform targetTransform, string characterName)
-    {
-        CreateHudSlot(instanceId, targetTransform, characterName);
-    }
+    //public void AddInteractiondSlot(int instanceId, Transform targetTransform, string characterName)
+    //{
+    //    CreateHudSlot(instanceId, targetTransform, characterName);
+    //}
 
-    private void CreateInteractionSlot(int instanceId, string interactionTitle, string interactionkey
-        , Transform targetTransform
-        , Action<string> onClockCallback = null)
-    {
-        var gObj = Instantiate(Prefab_HudSlot, Transform_SlotRoot);
-        if (gObj == null) return;
+    //private void CreateInteractionSlot(int instanceId, string interactionTitle, string interactionkey
+    //    , Transform targetTransform
+    //    , Action<string> onClockCallback = null)
+    //{
+    //    var gObj = Instantiate(Prefab_HudSlot, Transform_SlotRoot);
+    //    if (gObj == null) return;
 
-        var slotComponent = gObj.GetComponent<InteractionSlotUI>();
-        if (slotComponent == null) return;
+    //    var slotComponent = gObj.GetComponent<InteractionSlotUI>();
+    //    if (slotComponent == null) return;
 
-        slotComponent.InitSlot(instanceId, interactionTitle, interactionkey
-            , targetTransform
-            , onClockCallback);
+    //    slotComponent.InitSlot(instanceId, interactionTitle, interactionkey
+    //        , targetTransform
+    //        , onClockCallback);
 
-        _interactionSlotList.Add(instanceId, slotComponent);
-    }
+    //    _interactionSlotList.Add(instanceId, slotComponent);
+    //}
 
     
     public void RemoveHudSlot(int instanceId)

@@ -73,7 +73,7 @@ public class DaniTechGameManager : MonoBehaviour
                 {
                     if (itemData.ItemType == "Carrot")
                     {
-                        DaniTechUIManager.Instance.OpenUI(DaniTechUIRootType.PopupUI, DaniTechUIType.CarrotChoicePopupUI);
+                        DaniTechUIManager.Instance.OpenPopupUI( DaniTechUIType.CarrotChoicePopupUI);
                         break;
                     }
                     UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList); 
@@ -87,7 +87,7 @@ public class DaniTechGameManager : MonoBehaviour
         return true;
     }
 
-    //일단은 하드코딩으로 돌아가게 만들고 개선은 나중에. 이 굴욕은 반드시 갚겠다.
+    //일단은 하드코딩으로 돌아가게 만듦.
     public void UseCarrotItemFunction(string itemUseType, int useItemParam)
     {
         if(itemUseType == "StatChangeHp")

@@ -5,7 +5,7 @@ public class CarrotScoreUI : MonoBehaviour
 {
     [SerializeField] private Text Text_CurrentScore;
 
-    public int _carrotGoal = 10;
+    public int _carrotGoal = 15;
 
     public void SetCarrotScore(int currentCarrot)
     {

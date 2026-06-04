@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3913345384659400806}
-  - component: {fileID: 5018508233967505328}
+  - component: {fileID: 1894513434546681111}
   - component: {fileID: 5336684423402810778}
   - component: {fileID: 1874681594026397106}
   m_Layer: 0
-  m_Name: Monster_Slime
+  m_Name: Monster_PigSlime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,14 +28,14 @@ Transform:
   m_GameObject: {fileID: 1113892166969296485}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6, y: -2.06, z: -2.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2420435343989445246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5018508233967505328
+--- !u!114 &1894513434546681111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cb706b708445c4498124f6c6b34924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameMonster
-  SkillCoolTime: 3
+  SkillCoolTime: 5
   Prefab_MonsterSkillObject: {fileID: 6367772490329889367, guid: 988a09df3347550448cf857182ef91c5, type: 3}
   SpriteRenderer_Monster: {fileID: 6627811897836811848}
   _instanceId: 0
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.8930268, y: 0.20159996}
+  m_Offset: {x: 0.27901828, y: 0.028343558}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -126,7 +126,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.7471132, y: 1.5381415}
+  m_Size: {x: 4.004467, y: 3.4057615}
   m_EdgeRadius: 0
 --- !u!1 &2944356783977162841
 GameObject:
@@ -155,8 +155,8 @@ Transform:
   m_GameObject: {fileID: 2944356783977162841}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.6539771, y: 0.7027824, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3913345384659400806}
@@ -210,9 +210,9 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -268077427, guid: a07d8af852bcb644faad48a4a7ea8c49, type: 3}
+  m_Sprite: {fileID: 1390580190, guid: 6340990828cd25642b2a1474411eb5da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.64, y: 0.35}
@@ -230,7 +230,7 @@ Animator:
   m_GameObject: {fileID: 2944356783977162841}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9c8523312cf7b184c93cd3dcbb938dc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: ab636ab96e338ea4689fe0584c53a0a2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

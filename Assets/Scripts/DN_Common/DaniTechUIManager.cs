@@ -17,7 +17,6 @@ public class DaniTechUIManager : MonoBehaviour
     // 얘는 활성과 비활성에 관한 부분 -> SetActive
     private HashSet<DaniTechUIType> _openedUIDic = new HashSet<DaniTechUIType>();
 
-
     private void Awake()
     {
         Instance = this;
@@ -115,19 +114,18 @@ public class DaniTechUIManager : MonoBehaviour
         return OpenUI(DaniTechUIRootType.ContentUI, uiType);
     }
 
-    public DaniTechUIBase OpenPopupUI(DaniTechUIType uiType)
-    {
-        return OpenUI(DaniTechUIRootType.PopupUI, uiType);
-    }
-
     public void CloseContentUI(DaniTechUIType uiType)
     {
         CloseUI(DaniTechUIRootType.ContentUI, uiType);
+    }
+
+    public DaniTechUIBase OpenPopupUI(DaniTechUIType uiType)
+    {
+        return OpenUI(DaniTechUIRootType.PopupUI, uiType);
     }
 
     public void ClosePopupUI(DaniTechUIType uiType)
     {
         CloseUI(DaniTechUIRootType.PopupUI, uiType);
     }
-
 }

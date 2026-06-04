@@ -49,15 +49,17 @@
     "PrefabPath": "2DObject/Monster_Bear"
   },
   {
-    "Id": "mob_bat_1",
-    "Name": "박쥐",
-    "Description": "거대한 박쥐. ",
-    "BaseHp": null,
-    "BaseAtk": null,
-    "NormalAtkMultiple": null,
-    "SkillAtkMultipleList": null,
+    "Id": "mob_pigslime_1",
+    "Name": "피그 슬라임",
+    "Description": "귀엽지만 강한 힘을 가졌다.",
+    "BaseHp": 1500,
+    "BaseAtk": 150,
+    "NormalAtkMultiple": 2,
+    "SkillAtkMultipleList": [
+      2
+    ],
     "IconPath": null,
-    "PrefabPath": null
+    "PrefabPath": "2DObject/Monster_PigSlime"
   },
   {
     "Id": "mob_helldog_1",
@@ -66,9 +68,11 @@
     "BaseHp": 2000,
     "BaseAtk": 200,
     "NormalAtkMultiple": 3,
-    "SkillAtkMultipleList": null,
+    "SkillAtkMultipleList": [
+      3
+    ],
     "IconPath": null,
-    "PrefabPath": null
+    "PrefabPath": "2DObject/Monster_HellDog"
   },
   {
     "Id": "mob_frog_1",

@@ -5,8 +5,7 @@
     "Name": "옥수수",
     "Description": "필드 채집용 옥수수",
     "DropCountRange": [
-      10,
-      100
+      1
     ],
     "DropItemDataId": "Item_Corn_1",
     "IconPath": null,
@@ -31,8 +30,7 @@
     "Name": "감자",
     "Description": "필드 채집용 감자",
     "DropCountRange": [
-      10,
-      100
+      1
     ],
     "DropItemDataId": "Item_Potato_1",
     "IconPath": null,

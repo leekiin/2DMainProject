@@ -57,7 +57,7 @@ public class DaniTechGameManager : MonoBehaviour
 
     public bool RequestUseItem(long requestUseTargetItemUniqueId)
     {
-        int removeRatgetIdx = 0;
+        int removeTargetIdx = 0;
         bool isRemoveItemExist = false;
         foreach (var itemModel in _playerModel.ItemList)
         {
@@ -66,7 +66,6 @@ public class DaniTechGameManager : MonoBehaviour
                 isRemoveItemExist = true;
 
                 string itemDataId = itemModel.ItemDataId;
-                string itemType = itemModel.ItemType;
                 var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
 
                 if(itemData.UseItemType != null && itemData.UseItemType.Count > 0)
@@ -76,14 +75,14 @@ public class DaniTechGameManager : MonoBehaviour
                         DaniTechUIManager.Instance.OpenPopupUI(DaniTechUIType.CarrotChoicePopupUI);
                         break;
                     }
-                    UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList); 
+                    UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList);
                 }
                 break;
             }
-            removeRatgetIdx++;
+            removeTargetIdx++;
         }
 
-        RequestRemoveItem(isRemoveItemExist, removeRatgetIdx);
+        RequestRemoveItem(isRemoveItemExist, removeTargetIdx);
         return true;
     }
 
@@ -164,7 +163,6 @@ public class DaniTechGameManager : MonoBehaviour
 
     private bool RequestRemoveItem(bool isRemoveItemExist, int removeRatgetIdx)
     {
-        
         if(isRemoveItemExist == true)
         {
             _playerModel.ItemList.RemoveAt(removeRatgetIdx);

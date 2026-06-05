@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
-using UnityEditor.Search;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -48,35 +48,33 @@ public class CardManager : MonoBehaviour
 
     private void HandleCardHotKeys()
     {
-        int targetIdx = -1;
-        if (Input.GetKeyDown(KeyCode.Alpha1) && handCards.Count > 0) StartAiming(handCards[0]);
-        if (Input.GetKeyDown(KeyCode.Alpha2) && handCards.Count > 1) StartAiming(handCards[1]);
-        if (Input.GetKeyDown(KeyCode.Alpha3) && handCards.Count > 2) StartAiming(handCards[2]);
-        if (Input.GetKeyDown(KeyCode.Alpha4) && handCards.Count > 3) StartAiming(handCards[3]);
-        if (Input.GetKeyDown(KeyCode.Alpha5) && handCards.Count > 4) StartAiming(handCards[4]);
-        if (Input.GetKeyDown(KeyCode.Alpha6) && handCards.Count > 5) StartAiming(handCards[5]);
+        if(Input.anyKeyDown == false) return;
 
-
-        if ((targetIdx >= 0) && (targetIdx < handCards.Count))
+        for(int i = 0; i < handCards.Count; i++)
         {
-            CardSlotUI selectEventCard = handCards[targetIdx];
-
-            if(aimingCard == null) // 아직 조준 중이 아닐 때만
+            if(Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                StartAiming(selectEventCard);
-            }
-            else 
-            { 
-                if(aimingCard == selectEventCard) // 이미 조준 중인 카드와 같은 번호를 눌렀을 때는 조준 취소
+                CardSlotUI selectedEventCard = handCards[i];
+
+                if (aimingCard == null) // 아직 조준 중이 아닐 때만
                 {
-                    CancelAiming();
+                    StartAiming(selectedEventCard);
                 }
-                else // 다른 카드 번호를 눌렀을 때는 새로운 카드로 조준 시작
+                else
                 {
-                    aimingCard.ReturnToHand(); // 기존 조준 카드 원위치
-                    aimingCard = selectEventCard; // 새로운 카드로 교체
-                    aimingCard.HideCardForAiming(); // 새 카드 숨김
+                    if (aimingCard == selectedEventCard) // 이미 조준 중인 카드와 같은 번호를 눌렀을 때는 조준 취소
+                    {
+                        CancelAiming();
+                    }
+                    else // 다른 카드 번호를 눌렀을 때는 새로운 카드로 조준 시작
+                    {
+                        aimingCard.ReturnToHand(); // 기존 조준 카드 원위치
+                        aimingCard = selectedEventCard; // 새로운 카드로 교체
+                        aimingCard.HideCardForAiming(); // 새 카드 숨김
+                    }
                 }
+
+                break;
             }
         }
     }

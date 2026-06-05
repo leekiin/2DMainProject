@@ -47,7 +47,7 @@ public class CarrotChoicePopupUI : DaniTechUIBase
     public void OnClick_SelectAtk()
     {
         Debug.Log("공격력 선택");
-        DaniTechGameManager.Inst.UseCarrotItemFunction("StatChangeAtk", 20);
+        DaniTechGameManager.Inst.UseCarrotItemFunction("StatChangeAtk", 30);
         DaniTechUIManager.Instance.ClosePopupUI(DaniTechUIType.CarrotChoicePopupUI);
     }
 

@@ -55,6 +55,9 @@ MonoBehaviour:
   Btn_SelectHp: {fileID: 7000793515497690430}
   Btn_SelectAtk: {fileID: 2210065878726784052}
   Btn_SelectSkillCard: {fileID: 574390753064933089}
+  HpString: {fileID: 0}
+  AtkString: {fileID: 0}
+  SkillCardString: {fileID: 0}
 --- !u!1 &723241100333773625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1524,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Atk + 20
+  m_Text: Atk + 30
 --- !u!1 &7339316220532364188
 GameObject:
   m_ObjectHideFlags: 0

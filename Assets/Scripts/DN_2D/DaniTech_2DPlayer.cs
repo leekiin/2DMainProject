@@ -300,7 +300,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     {
         var monsterComponent = DaniTechGameObjectManager.Inst.GetMonsterObjectByInstanceId(monsterInstanceId);
         if (monsterComponent == null) return;
-
+        
         Debug.LogWarning($"플레이어가 몬스터 {monsterInstanceId}에게 스킬 데미지 {skilldamage}를 입혔습니다.");
         monsterComponent.TakeDamage(skilldamage);
     }

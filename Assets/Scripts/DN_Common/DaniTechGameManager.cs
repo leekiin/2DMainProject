@@ -73,7 +73,7 @@ public class DaniTechGameManager : MonoBehaviour
                 {
                     if (itemData.ItemType == "Carrot")
                     {
-                        DaniTechUIManager.Instance.OpenPopupUI( DaniTechUIType.CarrotChoicePopupUI);
+                        DaniTechUIManager.Instance.OpenPopupUI(DaniTechUIType.CarrotChoicePopupUI);
                         break;
                     }
                     UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList); 
@@ -103,6 +103,7 @@ public class DaniTechGameManager : MonoBehaviour
         else if(itemUseType == "AddSkillCard")
         {
             //스킬 카드 추가 로직
+            CardManager.Instance.AddCardToHand("TestSkill_1");
         }
     }
 

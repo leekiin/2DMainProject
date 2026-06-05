@@ -52,6 +52,7 @@ public class CarrotChoicePopupUI : DaniTechUIBase
     public void OnClick_SelectSkillCard()
     {
         Debug.Log("스킬 카드 선택");
+        DaniTechGameManager.Inst.UseCarrotItemFunction("AddSkillCard", 1);
         DaniTechUIManager.Instance.ClosePopupUI(DaniTechUIType.CarrotChoicePopupUI);
     }
 

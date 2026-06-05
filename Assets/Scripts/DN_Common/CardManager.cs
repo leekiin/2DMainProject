@@ -6,6 +6,10 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance;
 
+    [Header("Prefabs & Canvas")]
+    public GameObject Prefab_Card;
+    public Transform Transform_CardParent;
+
     [Header("Layout")]
     public RectTransform centerPoint; // 카드가 정렬될 중심점 (구 전투버튼 위치)
     public List<CardSlotUI> handCards = new List<CardSlotUI>(); // 현재 들고 있는 카드들
@@ -29,22 +33,87 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
-        AlignCards();
+        DrawDefaultCards(3);
     }
 
     void Update()
     {
-        // 1. 단축키 입력 처리 (1, 2, 3번 키로 카드 선택)
-        if (aimingCard == null) // 이미 조준 중이 아닐 때만
+        HandleCardHotKeys();
+        
+        if(aimingCard != null)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && handCards.Count > 0) StartAiming(handCards[0]);
-            if (Input.GetKeyDown(KeyCode.Alpha2) && handCards.Count > 1) StartAiming(handCards[1]);
-            if (Input.GetKeyDown(KeyCode.Alpha3) && handCards.Count > 2) StartAiming(handCards[2]);
-        }
-        else
-        {
-            // 2. 조준 중일 때의 처리
             UpdateAiming();
+        }
+    }
+
+    private void HandleCardHotKeys()
+    {
+        int targetIdx = -1;
+        if (Input.GetKeyDown(KeyCode.Alpha1) && handCards.Count > 0) StartAiming(handCards[0]);
+        if (Input.GetKeyDown(KeyCode.Alpha2) && handCards.Count > 1) StartAiming(handCards[1]);
+        if (Input.GetKeyDown(KeyCode.Alpha3) && handCards.Count > 2) StartAiming(handCards[2]);
+        if (Input.GetKeyDown(KeyCode.Alpha4) && handCards.Count > 3) StartAiming(handCards[3]);
+        if (Input.GetKeyDown(KeyCode.Alpha5) && handCards.Count > 4) StartAiming(handCards[4]);
+        if (Input.GetKeyDown(KeyCode.Alpha6) && handCards.Count > 5) StartAiming(handCards[5]);
+
+
+        if ((targetIdx >= 0) && (targetIdx < handCards.Count))
+        {
+            CardSlotUI selectEventCard = handCards[targetIdx];
+
+            if(aimingCard == null) // 아직 조준 중이 아닐 때만
+            {
+                StartAiming(selectEventCard);
+            }
+            else 
+            { 
+                if(aimingCard == selectEventCard) // 이미 조준 중인 카드와 같은 번호를 눌렀을 때는 조준 취소
+                {
+                    CancelAiming();
+                }
+                else // 다른 카드 번호를 눌렀을 때는 새로운 카드로 조준 시작
+                {
+                    aimingCard.ReturnToHand(); // 기존 조준 카드 원위치
+                    aimingCard = selectEventCard; // 새로운 카드로 교체
+                    aimingCard.HideCardForAiming(); // 새 카드 숨김
+                }
+            }
+        }
+    }
+
+    public void AddCardToHand(string skillID)
+    {
+        if (Prefab_Card == null)
+        {
+            Debug.LogError("Card Prefab이 CardManager에 할당되지 않았습니다!");
+            return;
+        }
+
+        // 1. 프리팹을 지정된 부모(Canvas) 밑에 생성
+        GameObject newCardObj = Instantiate(Prefab_Card, Transform_CardParent);
+
+        // 2. 생성 시점의 스케일 초기화 (DOTween 연출 유연성을 위해)
+        newCardObj.transform.localScale = Vector3.zero;
+
+        // 3. CardSlotUI 컴포넌트 획득 및 Skill ID 세팅
+        CardSlotUI newCardUI = newCardObj.GetComponent<CardSlotUI>();
+        if (newCardUI != null)
+        {
+            newCardUI.skillID = skillID;
+
+            // 4. 매니저의 리스트에 추가
+            handCards.Add(newCardUI);
+
+            // 5. 리스트가 갱신되었으므로 부채꼴 레이아웃 재정렬
+            AlignCards();
+        }
+    }
+
+    private void DrawDefaultCards(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            AddCardToHand($"Default_Skill_{i}");
         }
     }
 
@@ -160,8 +229,8 @@ public class CardManager : MonoBehaviour
         float rad = angle * Mathf.Deg2Rad;
 
         // CenterPoint(기준점)의 anchoredPosition을 원점으로 잡고 목표 UI 좌표 계산
-        float targetX = centerPoint.anchoredPosition.x + radius * Mathf.Cos(rad);
-        float targetY = centerPoint.anchoredPosition.y + radius * Mathf.Sin(rad);
+        float targetX = /*centerPoint.anchoredPosition.x + */radius * Mathf.Cos(rad);
+        float targetY = /*centerPoint.anchoredPosition.y + */radius * Mathf.Sin(rad);
         Vector2 targetPos = new Vector2(targetX, targetY);
 
         // 카드가 부채꼴 원주를 따라 자연스럽게 회전하도록 Z축 회전각 계산

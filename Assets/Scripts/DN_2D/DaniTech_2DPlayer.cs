@@ -76,7 +76,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private void Start()
     {
         DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
-        DaniTechUIManager.Instance.AddHudSlot(0, this.gameObject.transform, _characterName);
+        DaniTechUIManager.Instance.AddHudSlot(0, this.gameObject.transform, _characterName, _playerHp);
     }
 
     private void Update()

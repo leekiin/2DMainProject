@@ -159,14 +159,14 @@ public static class DaniTechUIManagerExtension
         uiManager.CloseUI(DaniTechUIRootType.ContentUI, DaniTechUIType.RobbyUI);
     }
 
-    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId, Transform targetTransform, string characterName)
+    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId, Transform targetTransform, string characterName, int maxHp)
     {
         var uiBase = uiManager.GetOpenedUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
         if (uiBase == null) return;
 
         if(uiBase is HudUI hudUI)
         {
-            hudUI.AddHudSlot(instanceId, targetTransform, characterName);
+            hudUI.AddHudSlot(instanceId, targetTransform, characterName, maxHp);
         }
     }
 

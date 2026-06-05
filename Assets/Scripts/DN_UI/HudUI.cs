@@ -16,12 +16,12 @@ public class HudUI : DaniTechUIBase
     private Dictionary<int, InteractionSlotUI> _interactionSlotList = new Dictionary<int, InteractionSlotUI>();
 
 
-    public void AddHudSlot(int instanceId, Transform targetTransform, string characterName)
+    public void AddHudSlot(int instanceId, Transform targetTransform, string characterName, int maxHp)
     {
-        CreateHudSlot(instanceId, targetTransform, characterName);
+        CreateHudSlot(instanceId, targetTransform, characterName, maxHp);
     }
 
-    private void CreateHudSlot(int instanceId, Transform targetTransform, string characterName)
+    private void CreateHudSlot(int instanceId, Transform targetTransform, string characterName, int maxHp)
     {
         var gObj = Instantiate(Prefab_HudSlot, Transform_SlotRoot);
         if (gObj == null) return;
@@ -29,7 +29,7 @@ public class HudUI : DaniTechUIBase
         var slotComponent = gObj.GetComponent<HudUISlot>();
         if (slotComponent == null) return;
 
-        slotComponent.InitSlot(instanceId, targetTransform, characterName);
+        slotComponent.InitSlot(instanceId, targetTransform, characterName, maxHp);
 
         _hudSlotList.Add(instanceId, slotComponent);
     }

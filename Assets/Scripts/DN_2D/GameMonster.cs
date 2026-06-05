@@ -48,7 +48,7 @@ public class GameMonster : MonsterBase
             _monsterName = _monsterData.Name;
         }
 
-        DaniTechUIManager.Instance.AddHudSlot(_instanceId, this.gameObject.transform, _monsterName);
+        DaniTechUIManager.Instance.AddHudSlot(_instanceId, this.gameObject.transform, _monsterName, _maxHp);
         StartCoroutine(CheckAndUseSkill());
     }
 

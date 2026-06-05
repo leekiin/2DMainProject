@@ -8,6 +8,7 @@ public class HudUISlot : MonoBehaviour
 
     [SerializeField] private GameObject Layout_TextArea;
     [SerializeField] private Text Text_Name;
+    [SerializeField] private Text Text_HP;
     [SerializeField] private Slider Slider_Hp;
     [SerializeField] private Slider Slider_Mp;
 
@@ -16,13 +17,15 @@ public class HudUISlot : MonoBehaviour
 
     private Transform _targetTransform;
 
-    public void InitSlot(int instanceId, Transform targetTransform, string characterName)
+    public void InitSlot(int instanceId, Transform targetTransform, string characterName, int maxHp)
     {
         _instanceId = instanceId;
         _targetTransform = targetTransform;
         SlotOffsetX = -20;
         SlotOffsetY = 120;
         Text_Name.text = characterName;
+        Text_HP.text = $"{maxHp}";
+
 
         TryBindStatEvent(targetTransform.gameObject);
     }
@@ -47,6 +50,7 @@ public class HudUISlot : MonoBehaviour
     private void OnTargetEntityHpChanged(int curHp, int maxHp)
     {
         Slider_Hp.value = (curHp / (float)maxHp);
+        Text_HP.text = $"{curHp}";
     }
 
     private void OnTargetEntityMpChanged(int curMp, int maxMp)

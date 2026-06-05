@@ -530,33 +530,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.2467585
---- !u!1 &1379073978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7736789842222392789, guid: 417ccdd502907784b8c005541f2eaeb3, type: 3}
-  m_PrefabInstance: {fileID: 7717350517716132637}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1379073981
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379073978}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 501bc8b6818b8da42aa10224a9d2f4bb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1537213383
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +969,10 @@ PrefabInstance:
     - target: {fileID: 7867031475396353337, guid: eed0ecd7a4e985c42b499fffc8ad8ed6, type: 3}
       propertyPath: m_Name
       value: MyMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278952154700143790, guid: eed0ecd7a4e985c42b499fffc8ad8ed6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8354686381148194036, guid: eed0ecd7a4e985c42b499fffc8ad8ed6, type: 3}
       propertyPath: _spawnObjectDataId
@@ -47274,10 +47251,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 1034097481201329925, guid: 417ccdd502907784b8c005541f2eaeb3, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7736789842222392789, guid: 417ccdd502907784b8c005541f2eaeb3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1379073981}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ccdd502907784b8c005541f2eaeb3, type: 3}
 --- !u!70 &7811530314499968381
 CapsuleCollider2D:

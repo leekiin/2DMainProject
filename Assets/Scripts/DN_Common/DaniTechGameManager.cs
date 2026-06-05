@@ -57,33 +57,73 @@ public class DaniTechGameManager : MonoBehaviour
 
     public bool RequestUseItem(long requestUseTargetItemUniqueId)
     {
-        int removeTargetIdx = 0;
-        bool isRemoveItemExist = false;
-        foreach (var itemModel in _playerModel.ItemList)
+        //int removeTargetIdx = 0;
+        //bool isRemoveItemExist = false;
+        //foreach (var itemModel in _playerModel.ItemList)
+        //{
+        //    if (itemModel.ItemUniqueId == requestUseTargetItemUniqueId)
+        //    {
+        //        isRemoveItemExist = true;
+
+        //        string itemDataId = itemModel.ItemDataId;
+        //        var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
+
+        //        if(itemData.UseItemType != null && itemData.UseItemType.Count > 0)
+        //        {
+        //            if (itemData.ItemType == "Carrot")
+        //            {
+        //                DaniTechUIManager.Instance.OpenPopupUI(DaniTechUIType.CarrotChoicePopupUI);
+        //                break;
+        //            }
+        //            UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList);
+        //        }
+        //        break;
+        //    }
+        //    removeTargetIdx++;
+        //}
+
+        //RequestRemoveItem(isRemoveItemExist, removeTargetIdx);
+        //return true;
+
+        // UniqueId로 리스트에서 인덱스를 정확하게 찾습니다.
+        int targetIdx = _playerModel.ItemList.FindIndex(item => item.ItemUniqueId == requestUseTargetItemUniqueId);
+
+        if (targetIdx == -1)
         {
-            if (itemModel.ItemUniqueId == requestUseTargetItemUniqueId)
-            {
-                isRemoveItemExist = true;
-
-                string itemDataId = itemModel.ItemDataId;
-                var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
-
-                if(itemData.UseItemType != null && itemData.UseItemType.Count > 0)
-                {
-                    if (itemData.ItemType == "Carrot")
-                    {
-                        DaniTechUIManager.Instance.OpenPopupUI(DaniTechUIType.CarrotChoicePopupUI);
-                        break;
-                    }
-                    UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList);
-                }
-                break;
-            }
-            removeTargetIdx++;
+            Debug.LogError("사용하려는 아이템을 인벤토리에서 찾을 수 없습니다.");
+            return false;
         }
 
-        RequestRemoveItem(isRemoveItemExist, removeTargetIdx);
-        return true;
+        var itemModel = _playerModel.ItemList[targetIdx];
+        var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemModel.ItemDataId);
+
+        if (itemData == null) return false;
+
+        // 아이템 타입 체크 (아이템 데이터에 정의된 Type 혹은 Model의 Type)
+        // 기획 데이터(itemData)의 ItemType이 "Carrot"이거나, 사용 타입이 특수 팝업을 띄우는 형태라면
+        if (itemData.ItemType == "Carrot")
+        {
+            // 당근 선택 팝업 오픈
+            DaniTechUIManager.Instance.OpenUI(DaniTechUIRootType.PopupUI, DaniTechUIType.CarrotChoicePopupUI);
+
+            // 아이템 소모 처리
+            _playerModel.ItemList.RemoveAt(targetIdx);
+            SaveData();
+            return true;
+        }
+
+        // 일반 아이템 사용 로직
+        if (itemData.UseItemType != null && itemData.UseItemType.Count > 0)
+        {
+            UseItemFunction(itemData.UseItemType[0], itemData.UseItemParameterList);
+
+            // 아이템 소모 처리
+            _playerModel.ItemList.RemoveAt(targetIdx);
+            SaveData();
+            return true;
+        }
+
+        return false;
     }
 
     //일단은 하드코딩으로 돌아가게 만듦.
@@ -102,7 +142,7 @@ public class DaniTechGameManager : MonoBehaviour
         else if(itemUseType == "AddSkillCard")
         {
             //스킬 카드 추가 로직
-            CardManager.Instance.AddCardToHand("TestSkill_1");
+            CardManager.Instance.AddCardToHand("Default_Skill_1");
         }
     }
 

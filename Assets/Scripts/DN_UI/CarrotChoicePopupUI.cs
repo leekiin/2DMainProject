@@ -14,17 +14,21 @@ public class CarrotChoicePopupUI : DaniTechUIBase
 
     private void OnEnable()
     {
+        Btn_SelectHp.UnBindOnClickButtonEvent(OnClick_SelectHp);
+        Btn_SelectAtk.UnBindOnClickButtonEvent(OnClick_SelectAtk);
+        Btn_SelectSkillCard.UnBindOnClickButtonEvent(OnClick_SelectSkillCard);
+
         Btn_SelectHp.BindOnClickButtonEvent(OnClick_SelectHp);
         Btn_SelectAtk.BindOnClickButtonEvent(OnClick_SelectAtk);
         Btn_SelectSkillCard.BindOnClickButtonEvent(OnClick_SelectSkillCard);
     }
 
-    private void OnDisable()
-    {
-        Btn_SelectHp.UnBindOnClickButtonEvent(OnClick_SelectHp);
-        Btn_SelectAtk.UnBindOnClickButtonEvent(OnClick_SelectAtk);
-        Btn_SelectSkillCard.UnBindOnClickButtonEvent(OnClick_SelectSkillCard);
-    }
+    //private void OnDisable()
+    //{
+    //    Btn_SelectHp.UnBindOnClickButtonEvent(OnClick_SelectHp);
+    //    Btn_SelectAtk.UnBindOnClickButtonEvent(OnClick_SelectAtk);
+    //    Btn_SelectSkillCard.UnBindOnClickButtonEvent(OnClick_SelectSkillCard);
+    //}
 
     public void InitCarrotChoicePopup(/*List<string> selectableBuffIdList*/)
     {

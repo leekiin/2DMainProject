@@ -19,17 +19,21 @@ public class ItemUsePopupUI : DaniTechUIBase
 
     private void OnEnable()
     {
+        Btn_CloseSelf.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
+        Btn_CloseAll.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
+        Btn_UseItem.UnBindOnClickButtonEvent(OnClick_UseItem);
+
         Btn_CloseSelf.BindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
         Btn_CloseAll.BindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
         Btn_UseItem.BindOnClickButtonEvent(OnClick_UseItem);
     }
 
-    private void OnDisable()
-    {
-        Btn_CloseSelf.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
-        Btn_CloseAll.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
-        Btn_UseItem.UnBindOnClickButtonEvent(OnClick_UseItem);
-    }
+    //private void OnDisable()
+    //{
+    //    Btn_CloseSelf.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
+    //    Btn_CloseAll.UnBindOnClickButtonEvent(OnClick_CloseItemUsePopupUI);
+    //    Btn_UseItem.UnBindOnClickButtonEvent(OnClick_UseItem);
+    //}
 
     public void OnClick_CloseItemUsePopupUI()
     {

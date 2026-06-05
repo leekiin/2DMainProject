@@ -11,7 +11,7 @@ public class CardManager : MonoBehaviour
     public Transform Transform_CardParent;
 
     [Header("Layout")]
-    public RectTransform centerPoint; // 카드가 정렬될 중심점 (구 전투버튼 위치)
+    public RectTransform centerPoint; // 카드가 정렬될 중심점
     public List<CardSlotUI> handCards = new List<CardSlotUI>(); // 현재 들고 있는 카드들
 
     [Header("Aiming")]
@@ -29,11 +29,6 @@ public class CardManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-        DrawDefaultCards(3);
     }
 
     void Update()
@@ -105,6 +100,13 @@ public class CardManager : MonoBehaviour
             // 5. 리스트가 갱신되었으므로 부채꼴 레이아웃 재정렬
             AlignCards();
         }
+    }
+
+    public void InitCardLayout(RectTransform targetCenter, Transform targetParent)
+    {
+        centerPoint = targetCenter;
+        Transform_CardParent = targetParent; // 외부에서 넘겨받은 메인 UI 오브젝트를 부모로 설정
+        DrawDefaultCards(3); 
     }
 
     private void DrawDefaultCards(int count)
@@ -223,32 +225,68 @@ public class CardManager : MonoBehaviour
 
     private void MoveCardToAngle(CardSlotUI card, float angle)
     {
-        // 삼각함수 계산을 위해 도(Degree)를 라디안(Radian)으로 변환
+        // 1. 삼각함수로 중심점(0,0) 기준의 부채꼴 로컬 오프셋 계산
         float rad = angle * Mathf.Deg2Rad;
+        float offsetX = radius * Mathf.Cos(rad);
+        float offsetY = radius * Mathf.Sin(rad);
+        Vector3 cardOffset = new Vector3(offsetX, offsetY, 0);
 
-        // CenterPoint(기준점)의 anchoredPosition을 원점으로 잡고 목표 UI 좌표 계산
-        float targetX = /*centerPoint.anchoredPosition.x + */radius * Mathf.Cos(rad);
-        float targetY = /*centerPoint.anchoredPosition.y + */radius * Mathf.Sin(rad);
-        Vector2 targetPos = new Vector2(targetX, targetY);
+        // 2. 공격 버튼(centerPoint)의 월드 좌표를 가져옵니다.
+        Vector3 buttonWorldPos = centerPoint.position;
 
-        // 카드가 부채꼴 원주를 따라 자연스럽게 회전하도록 Z축 회전각 계산
-        // 90도를 빼주는 이유는 유니티 UI 0도가 우측(3시 방향) 기준이기 때문에, 윗방향(12시)을 정면으로 맞추기 위함입니다.
+        // 3. 공격 버튼 월드 좌표에 부채꼴 오프셋을 더해, 카드가 가야 할 '월드 좌표'를 만듭니다.
+        Vector3 targetWorldPos = buttonWorldPos + cardOffset;
+
+        // 4. 이 월드 좌표를 카드의 부모(Transform_CardParent)의 로컬 좌표계로 변환합니다.
+        // 이렇게 하면 카드의 앵커가 Center든 어디든 상관없이 정확한 위치가 계산됩니다.
+        Vector2 targetPos = Transform_CardParent.InverseTransformPoint(targetWorldPos);
+
+        // 5. 회전각 계산 (기존 유지)
         float lookAngle = angle - 90f;
         Quaternion targetRot = Quaternion.Euler(0, 0, lookAngle);
 
-        // [중요] 카드가 기억할 '원래 자리' 데이터 업데이트
-        // 나중에 조준 취소(ReturnToHand)할 때 이 좌표를 보고 돌아옵니다.
+        // 원래 자리 기억하기
         card.SetOriginLayout(targetPos, targetRot);
 
-        // 만약 이 카드가 현재 조준 중인 카드가 아니라면 (패에 남아있는 상태라면) 즉시 DOTween 이동
+        // 조준 중이 아니라면 패 정렬 이동 (LocalMove 사용)
         if (aimingCard != card)
         {
             RectTransform cardRect = card.GetComponent<RectTransform>();
+            cardRect.DOKill();
 
-            cardRect.DOKill(); // 기존 움직임 애니메이션이 있다면 씹히지 않게 초기화
-            cardRect.DOAnchorPos(targetPos, alignDuration).SetEase(Ease.OutQuad);
+            cardRect.DOLocalMove(targetPos, alignDuration).SetEase(Ease.OutQuad);
             cardRect.DORotateQuaternion(targetRot, alignDuration).SetEase(Ease.OutQuad);
             cardRect.DOScale(Vector3.one, alignDuration).SetEase(Ease.OutQuad);
         }
+
+        //// 삼각함수 계산을 위해 도(Degree)를 라디안(Radian)으로 변환
+        //float rad = angle * Mathf.Deg2Rad;
+
+        //float targetX = /*centerPoint.anchoredPosition.x*/ + radius * Mathf.Cos(rad);
+        //float targetY = /*centerPoint.anchoredPosition.y*/ + radius * Mathf.Sin(rad);
+        //Vector2 targetPos = new Vector2(targetX, targetY);
+
+        //// 카드가 부채꼴 원주를 따라 자연스럽게 회전하도록 Z축 회전각 계산
+        //// 90도를 빼주는 이유는 유니티 UI 0도가 우측(3시 방향) 기준이기 때문에, 윗방향(12시)을 정면으로 맞추기 위함입니다.
+        //float lookAngle = angle - 90f;
+        //Quaternion targetRot = Quaternion.Euler(0, 0, lookAngle);
+
+        //// [중요] 카드가 기억할 '원래 자리' 데이터 업데이트
+        //// 나중에 조준 취소(ReturnToHand)할 때 이 좌표를 보고 돌아옵니다.
+        //card.SetOriginLayout(targetPos, targetRot);
+
+        //// 만약 이 카드가 현재 조준 중인 카드가 아니라면 (패에 남아있는 상태라면) 즉시 DOTween 이동
+        //if (aimingCard != card)
+        //{
+        //    RectTransform cardRect = card.GetComponent<RectTransform>();
+
+        //    cardRect.DOKill(); // 기존 움직임 애니메이션이 있다면 씹히지 않게 초기화
+
+        //    //cardRect.DOAnchorPos(targetPos, alignDuration).SetEase(Ease.OutQuad);
+        //    cardRect.DOLocalMove(targetPos, alignDuration).SetEase(Ease.OutQuad);
+        //    cardRect.DORotateQuaternion(targetRot, alignDuration).SetEase(Ease.OutQuad);
+        //    cardRect.DOScale(Vector3.one, alignDuration).SetEase(Ease.OutQuad);
+        //}
+
     }
 }

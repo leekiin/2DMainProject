@@ -28,6 +28,19 @@ public class DaniTech_MainUI : DaniTechUIBase
         Btn_FirstSkill.BindOnClickButtonEvent(OnClick_UseFirstSkill);
         Btn_SecondSkill.BindOnClickButtonEvent(OnClick_UseSecondSkill);
         Btn_ThirdSkill.BindOnClickButtonEvent(OnClick_UseThirdSkill);
+
+        if(CardManager.Instance != null)
+        {
+            RectTransform attackBtnRect = Btn_NormalAttack.GetComponent<RectTransform>();
+            if(attackBtnRect != null)
+            {
+                CardManager.Instance.InitCardLayout(attackBtnRect, this.transform);
+            }
+            else
+            {
+                Debug.LogError("Btn_NormalAttack에 RectTransform 컴포넌트가 없습니다.");
+            }
+        }
     }
 
     public void OnClick_OpenInventory()

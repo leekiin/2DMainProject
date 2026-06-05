@@ -120,7 +120,8 @@ public class CardSlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IEn
         rectTransform.DOKill(); // 기존 애니메이션 처치
 
         // 원래 배치 정보로 부드럽게 복귀 (Ease.OutCyan이나 OutQuad 추천)
-        rectTransform.DOAnchorPos(originAnchoredPosition, 0.4f).SetEase(Ease.OutQuad);
+        //rectTransform.DOAnchorPos(originAnchoredPosition, 0.4f).SetEase(Ease.OutQuad);
+        rectTransform.DOLocalMove(originAnchoredPosition, 0.4f).SetEase(Ease.OutQuad);
         rectTransform.DORotateQuaternion(originRotation, 0.4f).SetEase(Ease.OutQuad);
         rectTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutQuad);
 

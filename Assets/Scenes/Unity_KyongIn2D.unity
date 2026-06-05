@@ -329,7 +329,7 @@ PrefabInstance:
     - target: {fileID: 3638699622054703326, guid: d9614b341da396f43a8b38d13a069d93, type: 3}
       propertyPath: centerPoint
       value: 
-      objectReference: {fileID: 1677656333}
+      objectReference: {fileID: 0}
     - target: {fileID: 3638699622054703326, guid: d9614b341da396f43a8b38d13a069d93, type: 3}
       propertyPath: Transform_CardParent
       value: 
@@ -675,7 +675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1677656333
 RectTransform:
   m_ObjectHideFlags: 0

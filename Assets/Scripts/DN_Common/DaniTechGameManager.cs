@@ -152,7 +152,6 @@ public class DaniTechGameManager : MonoBehaviour
 
         if(itemUseType == "RandomItemBox")
         {
-
         }
         else if(itemUseType == "StatChangeAtk")
         {

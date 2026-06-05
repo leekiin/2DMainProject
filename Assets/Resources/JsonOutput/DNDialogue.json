@@ -2,7 +2,7 @@
   {
     "Id": "dialogue_mainstream_1_1_100",
     "CharacterDataId": "나레이터",
-    "Description": "토끼는 행복하지만 배가 고픕니다! 토끼가 전체 맵의 모든 당근을 모을 수 있게 도와주세요!\n[텍스트 창을 눌러 다음 대사를 출력하세요",
+    "Description": "토끼는 행복하지만 배가 고픕니다! 토끼가 전체 맵의 모든 당근을 모을 수 있게 도와주세요!\n[텍스트 창을 눌러 다음 대사를 출력하세요.]",
     "NextDialogueId": "dialogue_mainstream_1_1_200",
     "SelectionNameList": null,
     "SelectionDialogueIdList": null,

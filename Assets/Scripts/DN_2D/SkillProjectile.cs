@@ -7,9 +7,7 @@ public class SkillProjectile : SkillBase
 {
     [SerializeField] private SpriteRenderer SpriteRenderer_Effect;
     [SerializeField] private float ProjecTileSpeed = 10.0f;
-    [SerializeField] private float ProjecTileSecond = 10.0f;
-
-
+    [SerializeField] private float ProjecTileLifetime = 4.5f;
 
     private int _damage;
     private int _ownerInstanceId;
@@ -36,7 +34,7 @@ public class SkillProjectile : SkillBase
         _onSkillColision = onSkillCollision;
 
         this.gameObject.tag = parentTag;
-        StartCoroutine(DestroyAfterSeconds(ProjecTileSecond));
+        StartCoroutine(DestroyAfterSeconds(ProjecTileLifetime));
     }
 
     private void Update()
